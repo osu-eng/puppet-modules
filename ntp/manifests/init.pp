@@ -1,4 +1,8 @@
-class ntp( $is_virtual = true ) {
+class ntp(
+     $is_virtual = $ntp::params::is_virtual,
+     $servers = $ntp::params::servers
+    ) inherits ntp::params {
+
   package { 'ntp':
     ensure => present,
   }
@@ -14,6 +18,7 @@ class ntp( $is_virtual = true ) {
       ensure     => running,
       enable     => true,
       hasrestart => true,
+      hasstatus  => true,
       require    => Package['ntp'],
       subscribe  => File['/etc/ntp.conf'],
     }
@@ -25,6 +30,6 @@ class ntp( $is_virtual = true ) {
     group   => 'root',
     mode    => '644',
     require => Package['ntp'],
-    source  => 'puppet:///modules/ntp/ntp.conf',
+    content => template('ntp/ntp.conf.erb'),
   }
 }

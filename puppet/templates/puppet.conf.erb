@@ -1,0 +1,18 @@
+[main]
+    user = puppet
+    group = puppet
+    report = true
+    reports = log,store
+    logdir = /var/log/puppet
+    rundir = /var/run/puppet
+    ssldir = $vardir/ssl
+
+[agent]
+    classfile = $vardir/classes.txt
+    localconfig = $vardir/localconfig
+    server =  <%= puppetserver %>
+    pluginsync = true
+    report = true
+
+[master]
+    certname = <%= puppetserver %>
