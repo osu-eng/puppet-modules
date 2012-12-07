@@ -1,5 +1,5 @@
 class base {
-  $package_list = ["man", "wget", "gcc", "make", "vim"]
+  $package_list = ['man', 'wget', 'gcc', 'make', 'vim-enhanced']
   $package_blacklist = []
 
   package { $package_list:
