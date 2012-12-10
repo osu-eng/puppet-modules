@@ -1,0 +1,9 @@
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/resolv/templates/resolv.conf.erb
+
+<% [dns].flatten.each do |server| -%>
+nameserver <%= server %>
+<% end -%>
+domain <%= domain %>
+search <%= search %>

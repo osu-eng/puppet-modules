@@ -1,0 +1,50 @@
+{
+  "checksums": {
+    "manifests/init.pp": "3a0b7bc5d3847a9f7f433da51e533f7d",
+    "LICENSE": "4f960dc2fd2d219b183be6460aa70af3",
+    "tests/bond-static.pp": "d038aa1b571f9c634f17dd39dadbc191",
+    "TODO.md": "a4ddfc35c580d00ff8c2864d30f02adb",
+    "manifests/route.pp": "ccfa2b0634569cd3df6054fa101560d5",
+    "manifests/if/dynamic.pp": "cd801549dd0d996acf8d7b14a645773b",
+    "manifests/if/static.pp": "048c64220327524b06c76620554276e7",
+    "templates/ifcfg-eth.erb": "c74d8223e409e81bf0ad9669464b9bb1",
+    "templates/network.erb": "e4c5737d5fa7d2bf7b4ebfb5d1c91270",
+    "tests/if-dhcp.pp": "2b1139e23e4618467bc5ce6fe6810de2",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "tests/init.pp": "bbe690bfbfe1168dbacdcb10dfca41b0",
+    "tests/if-alias.pp": "c578e7350ef5e1ac5f119ea70a1d708f",
+    "templates/ifcfg-bond.erb": "6d6b774a9446ebe02cc1c88cadab4046",
+    "tests/if-static.pp": "3f893883d8b027139bbe05f9e756b802",
+    "manifests/bond/dynamic.pp": "3f1e96a4c183bd8d7ce4b512ef5f6c87",
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "tests/route.pp": "4aaa1184c5120882de307a252e7d543e",
+    "manifests/bond/slave.pp": "1bbfcee8b058da9346e7c6b9af746b86",
+    "manifests/bond/static.pp": "1c7577b01d6416978adb77806305c558",
+    "manifests/if/alias.pp": "52e69822d82c7858785b652c24e3bf28",
+    "tests/bond-alias.pp": "d8909705b39a486968bcbcafb087c805",
+    "templates/ifcfg-alias.erb": "3a0f2eacac89fef2429e2d14635f6861",
+    "README.md": "8ebbe71702ba3c0cc3180d1249a7c88d",
+    "tests/if-multiple.pp": "a899042d0a0879eb2ff0ac5225ffbc70",
+    "manifests/bond/alias.pp": "2f503ee4523773b36a824e50d854c404",
+    "templates/route-eth.erb": "f79e6af64a8cfd821ae8c614714a175c",
+    "tests/bond-dhcp.pp": "c9446d64e10a3ff6370815403b637773",
+    "tests/if-bootp.pp": "a424bf01bb43d5a51c2e953c052fee68",
+    "metadata.json": "8f4ee35ae2080b954c03a6fd0e32b4e1",
+    "Modulefile": "3b600136b76c5ec99d4e723753ad5bf0",
+    "manifests/global.pp": "f0786370345de6b1a411f2b49c43972d"
+  },
+  "project_page": "https://github.com/razorsedge/puppet-network",
+  "license": "Apache 2.0",
+  "version": "2.1.0",
+  "source": "git://github.com/razorsedge/puppet-network.git",
+  "description": "This module manages Red Hat/Fedora traditional network configuration.\n\nIt allows for static, dhcp, and bootp configuration of normal and bonded interfaces.  There is support for aliases on normal and bonded interfaces.  It can configure static routes.  It can configure MTU, ETHTOOL_OPTS, and BONDING_OPTS on a per-interface basis.\n\nIt can configure the following files:\n\n* /etc/sysconfig/network\n* /etc/sysconfig/networking-scripts/route-*\n* /etc/sysconfig/networking-scripts/ifcfg-*\n\nClass and Define documentation is available via puppetdoc.",
+  "summary": "Puppet module to manage RedHat/Fedora traditional network configuration.",
+  "author": "razorsedge",
+  "name": "razorsedge-network",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ]
+}

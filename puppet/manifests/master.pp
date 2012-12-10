@@ -13,4 +13,12 @@ class puppet::master {
     require    => Package['puppet-server'],
     subscribe  => File['/etc/puppet/puppet.conf'],
   }
+
+  if defined('firewall') {
+    firewall { '655 allow puppet master':
+      proto  => 'tcp',
+      dport  => '8140',
+      action => 'accept',
+    }
+  }
 }
