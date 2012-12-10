@@ -1,4 +1,4 @@
-class base {
+class general {
   $package_list = ['man', 'wget', 'gcc', 'make', 'vim-enhanced']
   $package_blacklist = []
 

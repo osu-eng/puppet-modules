@@ -5,7 +5,7 @@ class puppet::master {
     ensure => present,
   }
 
-  service { 'puppet-server':
+  service { 'puppetmaster':
     ensure     => running,
     enable     => true,
     hasrestart => true,
