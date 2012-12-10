@@ -1,0 +1,3 @@
+class { 'motd':
+  message => 'Welcome.',
+}
