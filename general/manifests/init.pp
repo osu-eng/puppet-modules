@@ -1,5 +1,5 @@
 class general {
-  $package_list = ['man', 'wget', 'gcc', 'make', 'vim-enhanced']
+  $package_list = [ 'man', 'wget', 'gcc', 'make', 'vim-enhanced' ]
   $package_blacklist = []
 
   include mail

@@ -3,6 +3,10 @@ class mail {
     ensure => present,
   }
 
+  package { [ 'exim', 'postfix' ]:
+    ensure => absent
+  }
+
   service { 'sendmail':
     ensure     => running,
     enable     => true,
