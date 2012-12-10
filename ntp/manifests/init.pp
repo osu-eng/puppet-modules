@@ -28,7 +28,7 @@ class ntp(
     ensure  => present,
     owner   => 'root',
     group   => 'root',
-    mode    => '644',
+    mode    => '0644',
     require => Package['ntp'],
     content => template('ntp/ntp.conf.erb'),
   }

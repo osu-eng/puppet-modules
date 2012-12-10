@@ -15,6 +15,14 @@ class ssh(
     subscribe  => File['/etc/ssh/sshd_config'],
   }
 
+  if defined('firewall') {
+    firewall { '700 allow ssh':
+      proto  => 'tcp',
+      dport  => $port,
+      action => 'accept',
+    }
+  }
+
   file { '/etc/ssh/sshd_config':
     ensure  => present,
     owner   => 'root',
