@@ -14,9 +14,9 @@
 [agent]
     classfile = $vardir/classes.txt
     localconfig = $vardir/localconfig
-    server =  <%= puppetserver %>
+    server =  <%= @server %>
     pluginsync = true
     report = true
 
 [master]
-    certname = <%= puppetserver %>
+    certname = <%= @server %>

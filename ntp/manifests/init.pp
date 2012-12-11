@@ -1,13 +1,9 @@
-class ntp(
-     $is_virtual = $ntp::params::is_virtual,
-     $servers = $ntp::params::servers
-    ) inherits ntp::params {
-
+class ntp($is_vm = false, $servers = [ '0.pool.ntp.org', '1.pool.ntp.org' ]) {
   package { 'ntp':
     ensure => present,
   }
 
-  if $is_virtual {
+  if $is_vm {
     service {'ntpd':
       ensure => stopped,
       enable => false,

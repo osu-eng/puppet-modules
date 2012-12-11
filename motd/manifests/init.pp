@@ -1,7 +1,4 @@
-class motd(
-     $message = $motd::params::message
-    ) inherits motd::params {
-
+class motd($message = 'Welcome.') {
   file { '/etc/motd':
     ensure  => present,
     owner   => 'root',

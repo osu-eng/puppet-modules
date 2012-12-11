@@ -1,7 +1,4 @@
-class ssh(
-     $port = $ssh::params::port
-    ) inherits ssh::params {
-
+class ssh($port = '22') {
   package { 'openssh':
     ensure => present,
   }

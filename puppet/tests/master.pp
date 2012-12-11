@@ -1,5 +1,2 @@
-class { 'puppet': 
-  puppetserver => 'puppet',
-}
-
+include puppet
 inlcude puppet::master

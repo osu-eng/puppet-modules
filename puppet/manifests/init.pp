@@ -1,7 +1,4 @@
-class puppet(
-     $puppetserver = $puppet::params::puppetserver
-    ) inherits puppet::params {
-
+class puppet($server = 'puppet') {
   include puppet::repos
 
   package { 'puppet':
@@ -28,9 +25,17 @@ class puppet(
     ensure  => present,
     owner   => 'root',
     group   => 'root',
-    mode    => '644',
+    mode    => '0644',
     content => template('puppet/puppet.conf.erb'),
     require => Package['puppet'],
     notify  => Service['puppet'],
+  }
+
+  file { '/etc/puppet/hiera.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/puppet/hiera.yaml',
   }
 }

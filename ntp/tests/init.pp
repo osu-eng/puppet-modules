@@ -1,4 +1,4 @@
 class { 'ntp':
-  is_virtual => true,
-  servers    => [ '0.pool.ntp.org', '1.pool.ntp.org' ]
+  is_vm   => false,
+  servers => [ '0.pool.ntp.org', '1.pool.ntp.org' ],
 }

@@ -1,6 +1,4 @@
 class puppet::master {
-  Class['puppet'] -> Class['puppet::master']
-
   package { 'puppet-server':
     ensure => present,
   }

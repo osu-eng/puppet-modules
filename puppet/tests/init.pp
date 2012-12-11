@@ -1,3 +1,3 @@
-class { 'puppet': 
-  puppetserver => 'puppet',
+class { 'puppet':
+  server => 'puppet',
 }
