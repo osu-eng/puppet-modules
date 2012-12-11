@@ -4,20 +4,17 @@ class ntp($is_vm = false, $servers = [ '0.pool.ntp.org', '1.pool.ntp.org' ]) {
   }
 
   if $is_vm {
-    service {'ntpd':
-      ensure => stopped,
-      enable => false,
-    }
+    $ensure = 'stopped'
+    $enable = false
+  } else {
+    $ensure = 'running'
+    $enable = true
   }
-  else {
-    service { 'ntpd':
-      ensure     => running,
-      enable     => true,
-      hasrestart => true,
-      hasstatus  => true,
-      require    => Package['ntp'],
-      subscribe  => File['/etc/ntp.conf'],
-    }
+  service { 'ntpd':
+    ensure     => $ensure,
+    enable     => $enable,
+    require    => Package['ntp'],
+    subscribe  => File['/etc/ntp.conf'],
   }
 
   file { '/etc/ntp.conf':
