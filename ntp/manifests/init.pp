@@ -1,4 +1,8 @@
-class ntp($is_vm = false, $servers = [ '0.pool.ntp.org', '1.pool.ntp.org' ]) {
+class ntp(
+  $is_vm = $ntp::params::is_vm,
+  $servers = $ntp::params::servers
+) inherits ntp::params {
+
   package { 'ntp':
     ensure => present,
   }

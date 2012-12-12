@@ -1,4 +1,7 @@
-class puppet($server = 'puppet') {
+class puppet(
+  $server = $puppet::params::server
+) inherits puppet::params {
+
   include puppet::repos
 
   package { 'puppet':
