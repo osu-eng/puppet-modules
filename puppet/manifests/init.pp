@@ -33,12 +33,4 @@ class puppet(
     require => Package['puppet'],
     notify  => Service['puppet'],
   }
-
-  file { '/etc/puppet/hiera.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/puppet/hiera.yaml',
-  }
 }

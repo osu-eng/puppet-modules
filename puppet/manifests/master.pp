@@ -19,4 +19,12 @@ class puppet::master {
       action => 'accept',
     }
   }
+
+  file { '/etc/puppet/hiera.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/puppet/hiera.yaml',
+  }
 }
