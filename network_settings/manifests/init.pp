@@ -3,10 +3,10 @@ class network_settings(
   $dns       = $network_settings::params::dns,
   $domain    = $network_settings::params::domain,
   $search    = $network_settings::params::search,
-  $address   = $network_settings::params::address,
   $netmask   = $network_settings::params::netmask,
   $gateway   = $network_settings::params::gateway,
   $state     = $network_settings::params::state,
+  $ip        = $network_settings::params::ip
 ) inherits network_settings::params {
 
   include network
