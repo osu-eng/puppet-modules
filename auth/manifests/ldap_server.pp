@@ -78,21 +78,21 @@ class auth::ldap_server(
     source  => 'puppet:///modules/auth/etc/sysconfig/ldap',
   }
 
-  file { '/etc/pki/tls/certs/slapdcert.pem':
+  file { $ldap_cert_path:
     ensure  => present,
     owner   => 'root',
     group   => 'ldap',
     mode    => '0644',
     require => Package['openldap-servers'],
-    source  => 'puppet:///private/slapdcert.pem',
+    source  => "puppet:///private${ldap_cert_path}",
   }
 
-  file { '/etc/pki/tls/private/slapdkey.pem':
+  file { $ldap_key_path:
     ensure  => present,
     owner   => 'root',
     group   => 'ldap',
     mode    => '0750',
     require => Package['openldap-servers'],
-    source  => 'puppet:///private/slapdkey.pem',
+    source  => "puppet:///private${ldap_key_path}",
   }
 }
