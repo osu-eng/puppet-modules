@@ -27,4 +27,20 @@ class puppet::master {
     mode    => '0644',
     source  => 'puppet:///modules/puppet/hiera.yaml',
   }
+
+  file { '/etc/puppet/fileserver.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/puppet/fileserver.conf',
+  }
+
+  file { '/etc/puppet/private':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0750',
+    require => Package['puppet-server'],
+  }
 }

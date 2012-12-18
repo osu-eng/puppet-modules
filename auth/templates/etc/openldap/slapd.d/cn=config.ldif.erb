@@ -1,0 +1,40 @@
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcConfigFile: /etc/openldap/slapd.conf.bak
+olcConfigDir: /etc/openldap/slapd.d
+olcAllows: bind_v2
+olcArgsFile: /var/run/openldap/slapd.args
+olcAttributeOptions: lang-
+olcAuthzPolicy: none
+olcConcurrency: 0
+olcConnMaxPending: 100
+olcConnMaxPendingAuth: 1000
+olcGentleHUP: FALSE
+olcIdleTimeout: 0
+olcIndexSubstrIfMaxLen: 4
+olcIndexSubstrIfMinLen: 2
+olcIndexSubstrAnyLen: 4
+olcIndexSubstrAnyStep: 2
+olcIndexIntLen: 4
+olcLocalSSF: 71
+olcPidFile: /var/run/openldap/slapd.pid
+olcReadOnly: FALSE
+olcReverseLookup: FALSE
+olcSaslSecProps: noplain,noanonymous
+olcSockbufMaxIncoming: 262143
+olcSockbufMaxIncomingAuth: 16777215
+olcThreads: 16
+olcTLSCACertificatePath: <%= @ldap_ca_path %>
+olcTLSCertificateFile: <%= @ldap_cert_path %>
+olcTLSCertificateKeyFile: <%= @ldap_key_path %>
+olcTLSVerifyClient: never
+olcToolThreads: 1
+olcWriteTimeout: 0
+structuralObjectClass: olcGlobal
+entryUUID: eb3c098a-b71f-1031-8dd5-13e6992584e2
+creatorsName: cn=config
+createTimestamp: 20121030205545Z
+entryCSN: 20121030205545.226987Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20121030205545Z

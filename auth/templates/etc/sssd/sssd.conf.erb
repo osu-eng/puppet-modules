@@ -1,0 +1,29 @@
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/auth/templates/etc/sssd/sssd.conf.erb
+
+[sssd]
+config_file_version = 2
+services = nss, pam
+domains = LDAP
+
+[nss]
+
+
+[pam]
+
+# LDAP domain
+[domain/LDAP]
+id_provider = ldap
+auth_provider = ldap
+ldap_schema = <%= @schema %>
+ldap_uri = <%= @uri %>
+ldap_search_base = <%= @base %>
+enumerate = true
+cache_credentials = true
+ldap_tls_reqcert = allow
+ldap_tls_cacertdir = /etc/openldap/cacerts
+entry_cache_timeout = 600
+ldap_network_timeout = 3
+chpass_provider = ldap
+ldap_id_use_start_tls = False

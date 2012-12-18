@@ -1,0 +1,98 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            c4:5d:bc:35:db:e9:71:4a
+        Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=US, ST=Ohio, L=Columbus, O=The Ohio State University, OU=CSE/CS, CN=cse-redhat-proxy.cse.ohio-state.edu/emailAddress=redhat-admins@cse.ohio-state.edu
+        Validity
+            Not Before: Apr 27 19:22:35 2011 GMT
+            Not After : Jan 17 19:22:35 2038 GMT
+        Subject: C=US, ST=Ohio, L=Columbus, O=The Ohio State University, OU=CSE/CS, CN=cse-redhat-proxy.cse.ohio-state.edu/emailAddress=redhat-admins@cse.ohio-state.edu
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:d5:5a:e9:29:34:80:6d:c0:c4:f4:e1:91:f2:1c:
+                    4a:3d:12:f8:0c:f0:45:40:1e:53:a1:1c:6a:b1:5d:
+                    a6:f9:6f:cf:6f:db:9e:63:58:a8:f0:cc:65:39:0d:
+                    a0:27:91:2a:69:80:0b:14:62:01:57:ed:0d:10:a8:
+                    91:ed:12:6e:ec:58:b3:49:1e:d7:a6:59:71:17:77:
+                    63:8c:94:7a:1a:22:b3:fa:b3:21:74:45:42:12:24:
+                    4b:39:0e:76:9e:ba:51:b9:e1:7b:5c:61:5b:a2:57:
+                    68:11:e2:96:ab:27:b1:bd:c9:9a:cf:0e:6c:65:05:
+                    eb:68:8b:ef:03:d1:4f:b3:3a:96:17:bb:2f:0e:69:
+                    4d:31:35:62:e4:61:64:4b:54:f2:19:c2:db:a1:0e:
+                    32:ef:94:9b:62:75:05:96:b4:e7:80:4c:27:3b:36:
+                    22:21:f7:67:8a:70:a0:f7:0a:c5:ac:de:f9:c1:0a:
+                    f9:50:fd:5b:6c:ba:ee:50:52:96:7f:5a:2b:f7:25:
+                    da:1a:17:99:3f:c0:b9:17:30:b7:9c:fe:40:76:1e:
+                    76:a0:25:87:dd:6e:07:72:8e:81:fe:fc:47:80:ac:
+                    3c:3e:ef:50:07:97:0c:c7:8b:5c:99:fe:5e:b3:09:
+                    2b:ee:d6:12:b5:40:22:d9:95:d7:b7:e4:e8:0c:dc:
+                    14:67
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:TRUE
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment, Certificate Sign
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            Netscape Comment: 
+                RHN SSL Tool Generated Certificate
+            X509v3 Subject Key Identifier: 
+                FE:2C:9D:47:FB:E2:9E:FE:7B:9B:79:C1:E2:61:DF:5D:D0:4F:84:90
+            X509v3 Authority Key Identifier: 
+                keyid:FE:2C:9D:47:FB:E2:9E:FE:7B:9B:79:C1:E2:61:DF:5D:D0:4F:84:90
+                DirName:/C=US/ST=Ohio/L=Columbus/O=The Ohio State University/OU=CSE/CS/CN=cse-redhat-proxy.cse.ohio-state.edu/emailAddress=redhat-admins@cse.ohio-state.edu
+                serial:C4:5D:BC:35:DB:E9:71:4A
+
+    Signature Algorithm: sha1WithRSAEncryption
+        be:fd:ec:b2:fd:38:bd:f8:cf:ad:44:9f:de:8e:f8:6a:e5:aa:
+        37:42:2b:0a:45:22:fa:0d:63:dd:29:51:3b:4c:cd:3f:d8:71:
+        56:aa:9b:62:ef:8b:90:7e:c2:ff:a1:33:72:92:59:6d:1a:62:
+        f4:97:c1:16:21:07:ec:c3:4c:0b:af:6b:cc:17:51:d0:80:f5:
+        a7:c1:60:c4:3b:5a:9e:a0:03:06:2d:05:96:f9:e9:2a:bf:31:
+        d1:de:8b:ad:5e:a8:03:0e:6a:e1:2f:10:55:30:f1:49:8f:7b:
+        e0:23:a4:41:49:db:24:9e:8a:8a:b4:7f:ac:cb:1a:bd:17:ec:
+        bf:e1:97:58:30:70:29:d9:6c:84:47:96:2d:59:0c:ce:83:23:
+        14:b4:fe:dd:68:70:6c:cb:c1:f7:07:58:f0:79:ed:71:2d:06:
+        ac:33:07:97:75:bf:28:db:b0:58:08:12:e2:49:ed:4f:89:6d:
+        55:85:42:4c:48:25:4f:e9:70:33:77:59:ee:a5:2d:ea:d2:e4:
+        57:f1:28:83:d5:94:2b:d5:8c:86:66:42:00:30:82:4e:21:37:
+        b3:7b:14:70:27:18:ee:67:2c:e6:b5:b3:fd:45:e5:bf:d4:cd:
+        ad:c0:c1:9b:4b:29:92:5f:26:60:57:3a:2b:10:9f:4c:88:f5:
+        db:4e:12:fc
+-----BEGIN CERTIFICATE-----
+MIIFmDCCBICgAwIBAgIJAMRdvDXb6XFKMA0GCSqGSIb3DQEBBQUAMIHDMQswCQYD
+VQQGEwJVUzENMAsGA1UECBMET2hpbzERMA8GA1UEBxMIQ29sdW1idXMxIjAgBgNV
+BAoTGVRoZSBPaGlvIFN0YXRlIFVuaXZlcnNpdHkxDzANBgNVBAsTBkNTRS9DUzEs
+MCoGA1UEAxMjY3NlLXJlZGhhdC1wcm94eS5jc2Uub2hpby1zdGF0ZS5lZHUxLzAt
+BgkqhkiG9w0BCQEWIHJlZGhhdC1hZG1pbnNAY3NlLm9oaW8tc3RhdGUuZWR1MB4X
+DTExMDQyNzE5MjIzNVoXDTM4MDExNzE5MjIzNVowgcMxCzAJBgNVBAYTAlVTMQ0w
+CwYDVQQIEwRPaGlvMREwDwYDVQQHEwhDb2x1bWJ1czEiMCAGA1UEChMZVGhlIE9o
+aW8gU3RhdGUgVW5pdmVyc2l0eTEPMA0GA1UECxMGQ1NFL0NTMSwwKgYDVQQDEyNj
+c2UtcmVkaGF0LXByb3h5LmNzZS5vaGlvLXN0YXRlLmVkdTEvMC0GCSqGSIb3DQEJ
+ARYgcmVkaGF0LWFkbWluc0Bjc2Uub2hpby1zdGF0ZS5lZHUwggEiMA0GCSqGSIb3
+DQEBAQUAA4IBDwAwggEKAoIBAQDVWukpNIBtwMT04ZHyHEo9EvgM8EVAHlOhHGqx
+Xab5b89v255jWKjwzGU5DaAnkSppgAsUYgFX7Q0QqJHtEm7sWLNJHtemWXEXd2OM
+lHoaIrP6syF0RUISJEs5DnaeulG54XtcYVuiV2gR4parJ7G9yZrPDmxlBetoi+8D
+0U+zOpYXuy8OaU0xNWLkYWRLVPIZwtuhDjLvlJtidQWWtOeATCc7NiIh92eKcKD3
+CsWs3vnBCvlQ/Vtsuu5QUpZ/Wiv3JdoaF5k/wLkXMLec/kB2HnagJYfdbgdyjoH+
+/EeArDw+71AHlwzHi1yZ/l6zCSvu1hK1QCLZlde35OgM3BRnAgMBAAGjggGLMIIB
+hzAMBgNVHRMEBTADAQH/MAsGA1UdDwQEAwICpDAdBgNVHSUEFjAUBggrBgEFBQcD
+AQYIKwYBBQUHAwIwMQYJYIZIAYb4QgENBCQWIlJITiBTU0wgVG9vbCBHZW5lcmF0
+ZWQgQ2VydGlmaWNhdGUwHQYDVR0OBBYEFP4snUf74p7+e5t5weJh313QT4SQMIH4
+BgNVHSMEgfAwge2AFP4snUf74p7+e5t5weJh313QT4SQoYHJpIHGMIHDMQswCQYD
+VQQGEwJVUzENMAsGA1UECBMET2hpbzERMA8GA1UEBxMIQ29sdW1idXMxIjAgBgNV
+BAoTGVRoZSBPaGlvIFN0YXRlIFVuaXZlcnNpdHkxDzANBgNVBAsTBkNTRS9DUzEs
+MCoGA1UEAxMjY3NlLXJlZGhhdC1wcm94eS5jc2Uub2hpby1zdGF0ZS5lZHUxLzAt
+BgkqhkiG9w0BCQEWIHJlZGhhdC1hZG1pbnNAY3NlLm9oaW8tc3RhdGUuZWR1ggkA
+xF28NdvpcUowDQYJKoZIhvcNAQEFBQADggEBAL797LL9OL34z61En96O+GrlqjdC
+KwpFIvoNY90pUTtMzT/YcVaqm2Lvi5B+wv+hM3KSWW0aYvSXwRYhB+zDTAuva8wX
+UdCA9afBYMQ7Wp6gAwYtBZb56Sq/MdHei61eqAMOauEvEFUw8UmPe+AjpEFJ2ySe
+ioq0f6zLGr0X7L/hl1gwcCnZbIRHli1ZDM6DIxS0/t1ocGzLwfcHWPB57XEtBqwz
+B5d1vyjbsFgIEuJJ7U+JbVWFQkxIJU/pcDN3We6lLerS5FfxKIPVlCvVjIZmQgAw
+gk4hN7N7FHAnGO5nLOa1s/1F5b/Uza3AwZtLKZJfJmBXOisQn0yI9dtOEvw=
+-----END CERTIFICATE-----
