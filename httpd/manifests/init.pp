@@ -1,3 +1,3 @@
-class skel {
+class httpd {
 
 }

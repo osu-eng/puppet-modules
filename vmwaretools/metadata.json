@@ -1,0 +1,39 @@
+{
+  "license": "Apache 2.0",
+  "version": "4.1.2",
+  "source": "git://github.com/razorsedge/puppet-vmwaretools.git",
+  "checksums": {
+    "LICENSE": "4f960dc2fd2d219b183be6460aa70af3",
+    "tests/ntp_class.pp": "9e593eb003ad841d09742ed1dd41a69d",
+    "spec/classes/vmwaretools_ntp_spec.rb": "e2af2f41385425c283e34cf23bd2a62a",
+    "tests/ntp.pp": "e6eeb1d254944407ad354842e97f7c01",
+    "Modulefile": "45a4621905fc5eaaaf4744145a9a6646",
+    "manifests/ntp.pp": "cb574879972c0a9f8eb4a0843fd4be19",
+    "manifests/params.pp": "37a2263d070b60ad5f166925c84d6c39",
+    "README.md": "320e3eb2b20d0169df13d599987260b0",
+    "tests/init_class.pp": "b534e8b00253ee1755dc098879e3a862",
+    "tests/init_topscope.pp": "0fc5e9c3825a93cafaff215bedd64e25",
+    "spec/classes/vmwaretools_spec.rb": "386736b28bc2709e5ea3c472e0c51c4c",
+    "bump-version.sh": "addc3f078e4d774c76497bbcb62c2777",
+    "tests/init.pp": "70cebc7cdbbb3ae4179c07b5939435af",
+    "TODO": "a73f97affa5f40b941c6f91863e1311c",
+    "Rakefile": "40485d97c221b33f8a2fe2b08cc4fcdf",
+    "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+    "tests/ntp_topscope.pp": "1e3af82a8d74e87022974a1d4f7db25e",
+    "manifests/init.pp": "52e40c0d34cee8f8998a0ca037229e3f"
+  },
+  "description": "This module manages the installation of the VMware Operating System Specific Packages for VMware tools.\n\nActions:\n\n    Removes old VMwareTools package or runs vmware-uninstall-tools.pl if found.\n    Installs a vmware YUM repository.\n    Installs the OSP.\n    Starts the vmware-tools service.\n\nOS Support:\n    RedHat family\t- tested on CentOS 5.5+ and CentOS 6.2+\n    Fedora\t\t- not supported\n    SuSE family\t\t- untested (initial support for yumrepo) (patches welcome)\n    Ubuntu\t\t- presently unsupported (patches welcome)\n    Debian\t\t- presently unsupported (patches welcome)\n\nClass documentation is available via puppetdoc.",
+  "summary": "Puppet module to manage VMware Operating System Specific Packages for VMware tools installation.",
+  "author": "razorsedge",
+  "name": "razorsedge-vmwaretools",
+  "dependencies": [
+    {
+      "version_requirement": ">=2.1.0",
+      "name": "puppetlabs/stdlib"
+    }
+  ],
+  "project_page": "https://github.com/razorsedge/puppet-vmwaretools",
+  "types": [
+
+  ]
+}

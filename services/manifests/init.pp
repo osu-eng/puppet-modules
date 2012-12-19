@@ -1,8 +1,5 @@
-class services(
-  $is_vm = $services::params::is_vm
-) inherits services::params {
-
-  if $is_vm {
+class services {
+  if $::is_virtual {
     $ensure = 'stopped'
     $enable = false
   } else {

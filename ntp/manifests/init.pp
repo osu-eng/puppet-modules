@@ -1,5 +1,4 @@
 class ntp(
-  $is_vm = $ntp::params::is_vm,
   $servers = $ntp::params::servers
 ) inherits ntp::params {
 
@@ -7,7 +6,7 @@ class ntp(
     ensure => present,
   }
 
-  if $is_vm {
+  if $::is_virtual {
     $ensure = 'stopped'
     $enable = false
   } else {

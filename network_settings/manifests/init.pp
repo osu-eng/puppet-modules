@@ -13,7 +13,7 @@ class network_settings(
   $macvar = "<%= scope.lookupvar('::macaddress_${interface}') %>"
 
   network::if::static { $interface:
-    ipaddress  => $address,
+    ipaddress  => $ip,
     netmask    => $netmask,
     gateway    => $gateway,
     macaddress => inline_template($macvar),

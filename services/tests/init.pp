@@ -1,3 +1,1 @@
-class { 'services':
-  is_vm   => false,
-}
+include services
