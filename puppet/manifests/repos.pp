@@ -23,7 +23,7 @@ class puppet::repos {
     descr    => 'Puppet Labs Devel El 6 - $basearch',
     baseurl  => 'http://yum.puppetlabs.com/el/6/devel/$basearch',
     gpgkey   => "file:///${gpgkey}",
-    enabled  => 1,
+    enabled  => 0,
     gpgcheck => 1,
     require  => File[$gpgkey],
   }
@@ -33,7 +33,7 @@ class puppet::repos {
     baseurl        => 'http://yum.puppetlabs.com/el/6/products/SRPMS',
     gpgkey         => "file:///${gpgkey}",
     failovermethod => priority,
-    enabled        => 1,
+    enabled        => 0,
     gpgcheck       => 1,
     require        => File[$gpgkey],
   }
@@ -42,7 +42,7 @@ class puppet::repos {
     descr    => 'Puppet Labs Source Dependencies El 6 - $basearch - Source',
     baseurl  => 'http://yum.puppetlabs.com/el/6/dependencies/SRPMS',
     gpgkey   => "file:///${gpgkey}",
-    enabled  => 1,
+    enabled  => 0,
     gpgcheck => 1,
     require  => File['/etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs'],
   }
@@ -51,7 +51,7 @@ class puppet::repos {
     descr    => 'Puppet Labs Devel El 6 - $basearch - Source',
     baseurl  => 'http://yum.puppetlabs.com/el/6/devel/SRPMS',
     gpgkey   => "file:///${gpgkey}",
-    enabled  => 1,
+    enabled  => 0,
     gpgcheck => 1,
     require  => File[$gpgkey],
   }

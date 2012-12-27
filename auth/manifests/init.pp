@@ -6,10 +6,12 @@ class auth(
   $realm = $auth::params::realm,
   $kdc = $auth::params::kdc,
   $ticket_lifetime = $auth::params::ticket_lifetime,
-  $login_groups = $auth::params::login_groups
+  $login_groups = $auth::params::login_groups,
+  $admin_group = $auth::params::admin_group
 ) inherits auth::params {
 
   include auth::config
+  include sudo
 
   package { [
     'openldap',
@@ -28,5 +30,12 @@ class auth(
     hasstatus  => true,
     require    => Package['sssd'],
     subscribe  => File['/etc/sssd/sssd.conf'],
+  }
+
+  if $admin_group {
+    sudo::directive {'admin_group':
+      ensure  => present,
+      content => "%${admin_group} ALL=(ALL)       ALL",
+    }
   }
 }

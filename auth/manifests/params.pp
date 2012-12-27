@@ -11,4 +11,5 @@ class auth::params {
   $kdc = 'kerberos.example.com:88'
   $ticket_lifetime = '24h'
   $login_groups = [ 'wheel' ]
+  $admin_group = false
 }
