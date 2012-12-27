@@ -6,6 +6,7 @@
 
 # This file is auto-generated.
 # User changes will be destroyed the next time authconfig is run.
+auth        required      pam_listfile.so onerr=fail item=group sense=allow file=/etc/logingroups
 auth        required      pam_env.so
 auth        [success=done ignore=ignore default=die] pam_pkcs11.so wait_for_card card_only
 auth        required      pam_deny.so
@@ -24,3 +25,4 @@ session     optional      pam_mkhomedir.so
 session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
 session     required      pam_unix.so
 session     optional      pam_sss.so
+session     optional      pam_krb5.so

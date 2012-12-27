@@ -6,7 +6,13 @@ class auth(
 
   include auth::config
 
-  package { [ 'openldap', 'openldap-clients', 'sssd' ]:
+  package { [
+    'openldap',
+    'openldap-clients',
+    'sssd',
+    'pam_krb5',
+    'krb5-workstation'
+  ]:
     ensure => present,
   }
 

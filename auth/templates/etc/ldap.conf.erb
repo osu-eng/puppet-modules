@@ -1,0 +1,22 @@
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/auth/templates/etc/ldap.conf.erb
+
+BASE <%= @base %>
+scope sub
+suffix "<%= @base %>"
+
+rootbinddn <%= @root_dn %>
+
+timelimit 5
+bind_timelimit 5
+
+uri <%= @uri %>
+
+pam_password exop
+
+ldap_version 3
+
+pam_filter objectclass=posixAccount
+pam_login_attribute uid
+pam_member_attribute memberuid

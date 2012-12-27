@@ -64,4 +64,28 @@ class auth::config {
     require => Package['sssd'],
     content => template('auth/etc/sssd/sssd.conf.erb'),
   }
+
+  file { '/etc/krb5.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('auth/etc/krb5.conf.erb'),
+  }
+
+  file { '/etc/ldap.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('auth/etc/ldap.conf.erb'),
+  }
+
+  file { '/etc/logingroups':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('auth/etc/logingroups.erb'),
+  }
 }
