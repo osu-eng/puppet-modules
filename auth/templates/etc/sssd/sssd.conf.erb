@@ -8,13 +8,15 @@ services = nss, pam
 domains = LDAP
 
 [nss]
-
+filter_users = root
+filter_groups = root
 
 [pam]
 
 # LDAP domain
 [domain/LDAP]
 id_provider = ldap
+auth_provider = ldap
 ldap_schema = <%= @schema %>
 ldap_uri = <%= @uri %>
 ldap_search_base = <%= @base %>
