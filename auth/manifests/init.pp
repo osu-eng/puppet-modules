@@ -1,7 +1,12 @@
 class auth(
   $base = $auth::params::base,
   $uri = $auth::params::uri,
-  $schema = $auth::params::schema
+  $schema = $auth::params::schema,
+  $root_dn = $auth::params::root_dn,
+  $realm = $auth::params::realm,
+  $kdc = $auth::params::kdc,
+  $ticket_lifetime = $auth::params::ticket_lifetime,
+  $login_groups = $auth::params::login_groups
 ) inherits auth::params {
 
   include auth::config
