@@ -1,5 +1,5 @@
 define sudo::directive (
-  $ensure  = present,
+  $ensure = present,
   $content = '',
   $source  = ''
 ) {
@@ -14,9 +14,9 @@ define sudo::directive (
       owner   => root,
       group   => root,
       mode    => '0440',
-      content => $content ? {
+      content => "${content}\n" ? {
         ''      => undef,
-        default => $content,
+        default => "${content}\n",
       },
       source  => $source ? {
         ''      => undef,

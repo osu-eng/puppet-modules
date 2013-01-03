@@ -35,7 +35,11 @@ class auth(
   if $admin_group {
     sudo::directive {'admin_group':
       ensure  => present,
-      content => "%${admin_group} ALL=(ALL)       ALL",
+      content => "%${admin_group} ALL=(ALL)        ALL",
+    }
+    sudo::directive {'admin_group_sftp':
+      ensure  => present,
+      content => "%${admin_group} ALL=(ALL) NOPASSWD: /usr/libexec/openssh/sftp-server",
     }
   }
 }
