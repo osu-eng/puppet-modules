@@ -1,0 +1,94 @@
+<!-- This file is managed by Puppet. -->
+<afp:AttributeFilterPolicyGroup
+    xmlns="urn:mace:shibboleth:2.0:afp:mf:basic"
+    xmlns:basic="urn:mace:shibboleth:2.0:afp:mf:basic"
+    xmlns:afp="urn:mace:shibboleth:2.0:afp"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <afp:AttributeFilterPolicy>
+        <!-- This policy is in effect in all cases. -->
+        <afp:PolicyRequirementRule xsi:type="ANY"/>
+
+        <afp:AttributeRule attributeID="WHOIS-ID">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="FERPA">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="MAJOR">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="ADVISOR">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="ADVR">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="ATAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="CLAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="CRAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="DISS">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="DPAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="FCAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="HOAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="MJAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="MNAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="OMAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="QEC">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="READ">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="SCAD">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="THES">
+            <afp:PermitValueRule xsi:type="AttributeIssuerString" value="urn:mace:incommon:osu.edu"/>
+        </afp:AttributeRule>
+
+        <afp:AttributeRule attributeID="*">
+            <afp:PermitValueRule xsi:type="ANY"/>
+        </afp:AttributeRule>
+    </afp:AttributeFilterPolicy>
+
+</afp:AttributeFilterPolicyGroup>
+
