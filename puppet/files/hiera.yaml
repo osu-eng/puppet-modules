@@ -1,5 +1,7 @@
 :hierarchy:
   - nodes/%{clientcert}
+  - network
+  - known_hosts
   - common
 :backends:
   - yaml
