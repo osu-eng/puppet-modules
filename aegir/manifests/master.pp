@@ -19,9 +19,24 @@ class aegir::master (
   # Apache options
   $apache_group_name = $aegir::params::apache_group_name,
   
+  # Drush options
+  $dot_drush = $aegir::params::dot_drush,
+  
 ) inherits aegir::params {
  
   include aegir
+  include pear
+    
+  # Note, pear module readme indicates this could fail without latest pear
+  pear::package { "drush":
+    version => "4.6.0",
+    repository => "pear.drush.org",
+    require    => Package['php-pear'],
+  }
   
-  
+  # Download provision with drush 
+  exec { 'provision_install':
+    command    => "/usr/bin/drush dl --yes --destination=${dot_drush} provision-6.x",
+    creates    => "${dot_drush}/provision",
+  }
 }

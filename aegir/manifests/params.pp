@@ -18,4 +18,7 @@ class aegir::params {
   
   # Apache stuff
   $apache_group_name = 'apache'
+  
+  # Drush stiff
+  $dot_drush = "${home}/.drush"
 }

@@ -45,7 +45,7 @@ class aegir (
     require    =>[User[$user_name], Group[$group_name]]
   }
   
-  file {"$home/.ssh":
+  file {"${home}/.ssh":
     ensure     => directory,
     owner      => $user_name,
     group      => $group_name,
@@ -53,7 +53,7 @@ class aegir (
     require    => File[$home]
   }
   
-  file {"$home/.ssh/id_rsa":
+  file {"${home}/.ssh/id_rsa":
     ensure     => present,
     owner      => $user_name,
     group      => $group_name,
@@ -62,7 +62,7 @@ class aegir (
     require    => File["$home/.ssh"]
   }
   
-  file {"$home/.ssh/id_rsa.pub":
+  file {"${home}/.ssh/id_rsa.pub":
     ensure     => present,
     owner      => $user_name,
     group      => $group_name,
