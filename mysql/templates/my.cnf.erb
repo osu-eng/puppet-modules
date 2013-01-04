@@ -1,0 +1,53 @@
+### Managed by Puppet
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# Default to using old password format for compatibility with mysql 3.x
+# clients (those using the mysqlclient10 compatibility package).
+# This is on in pre-puppet production. Hopefully it is not needed anymore tho we may need to convert.
+# old_passwords=1
+
+# I think a high value is necessary for dumps
+max_allowed_packet=32M
+
+# This was added from a time when we used a very bad operating system
+# It's probably not needed anymore.
+# lower_case_table_names=1
+
+####################################
+# Some of these performance settings cause a slower
+# startup process.  Be patient and try not to
+# bring it down during an important time.
+####################################
+
+log-slow-queries # places log in data directory
+long_query_time=10 # 10 seconds
+
+innodb_buffer_pool_size=1000000000 #size in bytes, recommended very large
+key_buffer_size=200000000 #200MB for temp/myisam
+
+query_cache_type=1 # queries will be cached if no sql_no_cache
+query_cache_size=200000000 # 300MB
+
+table_cache=1000 # num_connections*num joins, number of open tables
+open_files_limit=3000 #max number of open files, supposed to be 3x table_cache
+
+tmp_table_size=200000000 #200MB
+max_heap_table_size=300000000 # 300MB
+
+
+
+
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+# symbolic-links=0
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
