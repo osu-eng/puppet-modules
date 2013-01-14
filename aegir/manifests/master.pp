@@ -36,7 +36,7 @@ class aegir::master (
   
   # Download provision with drush 
   exec { 'provision_install':
-    command    => "/usr/bin/drush dl --yes --destination=${dot_drush} provision-6.x",
+    command    => "/usr/bin/sudo -uaegir /usr/bin/drush dl --yes --destination=${dot_drush} provision-6.x",
     creates    => "${dot_drush}/provision",
   }
 }

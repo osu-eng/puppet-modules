@@ -1,3 +1,3 @@
-class mysql_server::params {
+class mysql::params {
 
 }

@@ -72,22 +72,16 @@ class aegir (
   }
   
   # This doesn't seem to be working
-  /*
   sudo::directive {'aegir_apache_restart':
     ensure     => present,
     content    => "$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
     require    => User[$user_name],
   }
-  */
+  
   
   # Apache Bits
-  /*
-  file { "${home}/config/apache.conf"
+  file { '/etc/httpd/conf.d/aegir.conf':
     ensure     => 'link',
-    target     => '/etc/httpd/conf.d/aegir.conf',
-    require    => File(
+    target     => "${home}/config/apache.conf",
   }
-  */
-  
-  
 }
