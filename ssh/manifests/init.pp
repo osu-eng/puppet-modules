@@ -17,11 +17,10 @@ class ssh(
     subscribe  => File['/etc/ssh/sshd_config'],
   }
 
-  if defined('firewall') {
-    firewall { '700 allow ssh':
-      proto  => 'tcp',
-      dport  => $port,
-      action => 'accept',
+  if defined('firewall::rule') {
+    firewall::rule { 'allow-ssh':
+      weight => '200',
+      rule   => "-A INPUT -p tcp -m state --state NEW -m tcp --dport ${port} -j ACCEPT",
     }
   }
 

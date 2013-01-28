@@ -12,11 +12,10 @@ class puppet::master {
     subscribe  => File['/etc/puppet/puppet.conf'],
   }
 
-  if defined('firewall') {
-    firewall { '655 allow puppet master':
-      proto  => 'tcp',
-      dport  => '8140',
-      action => 'accept',
+  if defined('firewall::rule') {
+    firewall::rule { 'allow-puppet-master':
+      weight => '655',
+      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 8140 -j ACCEPT',
     }
   }
 

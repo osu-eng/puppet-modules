@@ -9,7 +9,6 @@ class php::apache {
     'php-mysql',
     'php-ldap',
     'php-mbstring',
-    'php-json',
     'php-pdo'
   ]:
     ensure => present,

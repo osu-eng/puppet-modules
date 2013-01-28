@@ -45,23 +45,20 @@ class apache(
     ensure     => running,
     enable     => true,
     require    => Package['httpd'],
-    subscribe  => 
-    subscribe => [
+    subscribe  => [
         File['/etc/httpd/conf/http.conf'],
         File['/etc/httpd/conf.d/ssl.conf']
     ],
   }
 
-  if defined('firewall') {
-    firewall { '375 allow http server':
-      proto  => 'tcp',
-      dport  => '80',
-      action => 'accept',
+  if defined('firewall::rule') {
+    firewall::rule { 'allow-http-server':
+      weight => '375',
+      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT',
     }
-    firewall { '376 allow https server':
-      proto  => 'tcp',
-      dport  => '443',
-      action => 'accept',
+    firewall::rule { 'allow-https-server':
+      weight => '376',
+      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT',
     }
   }
 

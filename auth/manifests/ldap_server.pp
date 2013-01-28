@@ -21,11 +21,10 @@ class auth::ldap_server(
     require    => Package['openldap-servers'],
   }
 
-  if defined('firewall') {
-    firewall { '225 allow ldap server':
-      proto  => 'tcp',
-      dport  => '636',
-      action => 'accept',
+  if defined('firewall::rule') {
+    firewall::rule { 'allow-ldap-server':
+      weight => '225',
+      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 636 -j ACCEPT',
     }
   }
 

@@ -16,8 +16,7 @@ class php(
     group   => 'root',
     mode    => '0644',
     require => Package['php-cli'],
-    notify  => Service['httpd'],
-    content => template('php/apc.ini.erb'),
+    content => template('php/php.ini.erb'),
   }
 
   if defined( Service['httpd'] ) {
