@@ -6,7 +6,9 @@ define firewall::rule (
 
   include firewall
 
-  file { "${fragment_dir}/fragments/${weight}${title}":
+  $rule_name = regsubst($title, ' ', '-', 'G')
+
+  file { "${fragment_dir}/fragments/${weight}${rule_name}":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
