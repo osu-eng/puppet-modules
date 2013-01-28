@@ -1,8 +1,8 @@
 define firewall::rule (
   $rule,
-  $weight = $firewall::params::weight,
-  $fragment_dir = $firewall::params::fragment_dir
-) inherits firewall::params {
+  $weight = '500',
+  $fragment_dir = '/etc/firewall.d'
+) {
 
   include firewall
 
@@ -11,7 +11,7 @@ define firewall::rule (
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
-    content => $rule,
+    content => "${rule}\n",
     notify  => Exec['firewall-concat'],
     before  => File['/etc/sysconfig/iptables'],
   }

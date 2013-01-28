@@ -24,7 +24,7 @@ class firewall(
     group   => 'root',
     mode    => '0600',
     source  => [
-      '${fragment_dir}/firewall-rules',
+      "${fragment_dir}/firewall-rules",
       'puppet:///modules/firewall/firewall-default'
     ],
     notify  => Service['iptables'],
