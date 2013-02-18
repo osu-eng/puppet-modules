@@ -7,7 +7,7 @@ class network_settings::params {
   $gateway   = '192.168.1.1'
   $state     = 'up'
 
-  $ip_hash = hiera('nodes', false)
+  $ip_hash = hiera('network_settings::site', false)
   if $ip_hash {
     if $ip_hash[$fqdn]['ip'] {
       $ip = $ip_hash[$fqdn]['ip']
