@@ -6,8 +6,9 @@ class auth(
   $realm = $auth::params::realm,
   $kdc = $auth::params::kdc,
   $ticket_lifetime = $auth::params::ticket_lifetime,
-  $login_groups = $auth::params::login_groups,
-  $admin_group = $auth::params::admin_group
+  $admin_group = $auth::params::admin_group,
+  $net_user_group = $auth::params::net_user_group,
+  $login_groups = hiera_array('auth::allowed_login_groups', $auth::params::login_groups)
 ) inherits auth::params {
 
   include auth::config

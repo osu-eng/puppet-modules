@@ -88,4 +88,12 @@ class auth::config {
     mode    => '0644',
     content => template('auth/etc/logingroups.erb'),
   }
+
+  file { '/etc/profile.d/netumask.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('auth/etc/profile.d/netumask.sh.erb'),
+  }
 }

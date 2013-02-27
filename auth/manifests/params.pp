@@ -12,4 +12,5 @@ class auth::params {
   $ticket_lifetime = '24h'
   $login_groups = [ 'wheel' ]
   $admin_group = false
+  $net_user_group = 'NetUser'
 }

@@ -1,0 +1,11 @@
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/auth/templates/etc/profile.d/netumask.sh.erb
+
+# If a network user, set appropriate umask
+for i in "<%= @net_user_group %>"; do
+  if [ "`id -gn`" = "${i}" ]; then
+    umask 002
+  fi
+done
+unset i

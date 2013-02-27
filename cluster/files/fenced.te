@@ -1,0 +1,35 @@
+
+module fenced 1.0;
+
+require {
+  type xm_t;
+  type user_tmp_t;
+  type ricci_modcluster_t;
+  type admin_home_t;
+  type chkpwd_t;
+  type fenced_t;
+  type sshd_t;
+  type ricci_t;
+  type ricci_var_lib_t;
+  type oddjob_t;
+  class process { siginh noatsecure rlimitinh };
+  class file { read open };
+  class dir { read search open getattr write };
+}
+
+#============= fenced_t ==============
+allow fenced_t admin_home_t:dir search;
+allow fenced_t user_tmp_t:dir { open read getattr search write };
+allow fenced_t user_tmp_t:file { read open };
+
+#============= oddjob_t ==============
+allow oddjob_t ricci_modcluster_t:process { siginh rlimitinh noatsecure };
+
+#============= ricci_t ==============
+allow ricci_t xm_t:process { siginh rlimitinh noatsecure };
+
+#============= sshd_t ==============
+allow sshd_t chkpwd_t:process { siginh rlimitinh noatsecure };
+
+#============= xm_t ==============
+allow xm_t ricci_var_lib_t:dir search;
