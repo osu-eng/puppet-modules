@@ -19,14 +19,6 @@ class cluster(
     gpgcheck => 1,
     require  => File[$gpgkey],
   }
-  yumrepo { 'rhel-lb':
-    descr    => 'Hat Enterprise Linux Load Balancer',
-    baseurl  => "${repo_url}/LoadBalancer",
-    gpgkey   => "file:///${gpgkey}",
-    enabled  => 1,
-    gpgcheck => 1,
-    require  => File[$gpgkey],
-  }
 
   file { $gpgkey:
     ensure  => present,

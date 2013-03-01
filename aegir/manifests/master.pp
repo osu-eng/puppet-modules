@@ -12,9 +12,9 @@ class aegir::master (
   $home = $aegir::params::home,
   
   # Aegir keys
-  $private_key_source = $aegir::params::private_key_source,
-  $public_key_source = $aegir::params::public_key_source,
-  $authorized_keys = $aegir::params::authorized_keys,
+  $private_key_source = hiera('aegir::private_key_source', $aegir::params::private_key_source),
+  $public_key_source = hiera('aegir::public_key_source', $aegir::params::public_key_source),
+  $authorized_keys = hiera('aegir::authorized_keys', $aegir::params::authorized_keys),
   
   # Apache options
   $apache_group_name = $aegir::params::apache_group_name,
@@ -28,10 +28,14 @@ class aegir::master (
   include pear
     
   # Note, pear module readme indicates this could fail without latest pear
-  pear::package { "drush":
-    version => "4.6.0",
-    repository => "pear.drush.org",
+  pear::package { 'Console_Table':
+    version => '1.1.3',
     require    => Package['php-pear'],
+  }
+  pear::package { 'drush':
+    version => '4.6.0',
+    repository => 'pear.drush.org',
+    require    => Pear::Package['Console_Table']
   }
   
   # Download provision with drush 

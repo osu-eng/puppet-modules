@@ -4,8 +4,8 @@ class shibboleth_server (
   $session_lifetime = $shibboleth_server::params::session_lifetime,
   $session_timeout = $shibboleth_server::params::session_timeout, 
   $session_relay_state = $shibboleth_server::params::session_relay_state,
-  $session_check_address = $shibboleth_server::params::session_check_address,
-  $session_handler_ssl = $shibboleth_server::params::session_handler_ssl,
+  $session_check_address = hiera('shibboleth_server::session_check_address', $shibboleth_server::params::session_check_address),
+  $session_handler_ssl = hiera('shibboleth_server::session_handler_ssl', $shibboleth_server::params::session_handler_ssl),
   $session_cookie_props = $shibboleth_server::params::session_cookie_props,
   
   $support_contact = $shibboleth_server::params::support_contact,

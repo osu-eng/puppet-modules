@@ -12,9 +12,9 @@ class aegir (
   $home = $aegir::params::home,
   
   # Aegir keys
-  $private_key_source = $aegir::params::private_key_source,
-  $public_key_source = $aegir::params::public_key_source,
-  $authorized_keys = $aegir::params::authorized_keys,
+  $private_key_source = hiera('aegir::private_key_source', $aegir::params::private_key_source),
+  $public_key_source = hiera('aegir::public_key_source', $aegir::params::public_key_source),
+  $authorized_keys = hiera('aegir::authorized_keys', $aegir::params::authorized_keys),
   
   # Apache options
   $apache_group_name = $aegir::params::apache_group_name,

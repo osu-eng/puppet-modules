@@ -1,6 +1,6 @@
 class apache(
   $timeout                = $apache::params::timeout,
-  $keepalive              = $apache::params::keepalive,
+  $keepalive              = hiera('apache::keepalive', $apache::params::keepalive),
   $max_keepalive_requests = $apache::params::max_keepalive_requests,
   $keepalive_timeout      = $apache::params::keepalive_timeout,
   $start_servers          = $apache::params::start_servers,
@@ -10,7 +10,8 @@ class apache(
   $max_requests_per_child = $apache::params::max_requests_per_child,
   $avg_child_memory       = $apache::params::avg_child_memory,
   $reserved_memory        = $apache::params::reserved_memory,
-  $max_clients            = $apache::params::max_clients
+  $max_clients            = $apache::params::max_clients,
+  $start_service          = hiera('apache::start_service', $apache::params::start_service)
 ) inherits apache::params {
 
   # We need to get system memory in MB as an integer
@@ -42,11 +43,11 @@ class apache(
   }
 
   service { 'httpd':
-    ensure     => running,
-    enable     => true,
+    ensure     => $start_service,
+    enable     => $start_service,
     require    => Package['httpd'],
     subscribe  => [
-        File['/etc/httpd/conf/http.conf'],
+        File['/etc/httpd/conf/httpd.conf'],
         File['/etc/httpd/conf.d/ssl.conf']
     ],
   }
@@ -62,7 +63,7 @@ class apache(
     }
   }
 
-  file { '/etc/httpd/conf/http.conf':
+  file { '/etc/httpd/conf/httpd.conf':
     ensure  => present,
     owner   => 'root',
     group   => 'root',

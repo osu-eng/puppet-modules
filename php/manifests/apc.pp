@@ -1,6 +1,6 @@
 class php::apc(
   $cache_memory = $php::params::cache_memory,
-  $stat         = $php::params::stat
+  $stat         = hiera('php::stat', $php::params::stat)
 ) inherits php::params {
 
   include php::apache

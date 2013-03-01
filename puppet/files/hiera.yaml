@@ -1,5 +1,6 @@
 :hierarchy:
   - nodes/%{clientcert}
+  - roles/%{::role}
   - network
   - known_hosts
   - common
