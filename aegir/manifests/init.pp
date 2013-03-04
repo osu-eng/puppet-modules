@@ -77,7 +77,17 @@ class aegir (
     content    => "$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
     require    => User[$user_name],
   }
-  
+
+  file {'/root/aegir-selinux.sh':
+    source => 'puppet:///modules/aegir/selinux.sh',
+    mode => '0755',
+  }
+
+  exec {'/root/aegir-selinux.output':
+    command => '/root/aegir-selinux.sh > /root/aegir-selinux.output',
+    require => File['/root/aegir-selinux.sh'] ,
+    creates => '/root/aegir-selinux.output'
+  }  
   
   # Apache Bits
   # We need this to not be there initially since we're quasi manually installing Aegir
