@@ -71,6 +71,8 @@ class aegir (
     require    => File["$home/.ssh"]
   }
   
+  
+  
   # This doesn't seem to be working
   sudo::directive {'aegir_apache_restart':
     ensure     => present,
@@ -93,11 +95,14 @@ class aegir (
     creates => "/etc/httpd/conf.d/aegir.conf",
     onlyif => "/usr/bin/test -f ${home}/config/apache.conf",
   }
+
+  # Various configuration files
+  file { "${home}/.ssh/authorized_keys":
+    ensure  => present,
+    owner      => $user_name,
+    group      => $group_name,
+    mode    => '0644',
+    content => template('aegir/authorized_keys.erb'),
+  }
   
-  # Apache Bits
-  # We need this to not be there initially since we're quasi manually installing Aegir
-  # file { '/etc/httpd/conf.d/aegir.conf':
-  #  ensure     => 'link',
-  #  target     => "${home}/config/apache.conf",
-  #}
 }
