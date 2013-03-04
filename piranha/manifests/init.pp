@@ -50,18 +50,17 @@ class piranha(
     content => template('piranha/piranha.passwd.erb'),
   }
 
-  if defined('firewall::rule') {
-    firewall::rule { 'allow-piranha-gui':
-      weight => '320',
-      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 3636 -j ACCEPT',
+  define piranha::markvip ($ip = $title) {
+    firewall::rule { "bundle-http-https-${ip}":
+      weight => '110',
+      table  => 'mangle',
+      rule   => "-A PREROUTING -p tcp -d ${ip}/32 -m multiport --dports 80,443 -j MARK --set-mark 80",
     }
-    define piranha::markvip {
-      firewall::rule { "bundle-http-https-${title}":
-        weight => '110',
-        table  => 'mangle',
-        rule   => "-A PREROUTING -p tcp -d ${title}/32 -m multiport --dports 80,443 -j MARK --set-mark 80",
-      }
-    }
-    piranha::markvip { $virtual_ip: }
+  }
+  piranha::markvip { $virtual_ip: }
+
+  firewall::rule { 'allow-piranha-gui':
+    weight => '320',
+    rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 3636 -j ACCEPT',
   }
 }
