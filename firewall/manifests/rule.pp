@@ -16,5 +16,6 @@ define firewall::rule (
     content => "${rule}\n",
     notify  => Exec['firewall-concat'],
     before  => File['/etc/sysconfig/iptables'],
+    require => File["${fragment_dir}/fragments"],
   }
 }

@@ -19,7 +19,7 @@ class piranha(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/cluster/RPM-GPG-KEY-rhel-local-lb',
+    source  => 'puppet:///modules/piranha/RPM-GPG-KEY-rhel-local-lb',
   }
 
   package { 'piranha':

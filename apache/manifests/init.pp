@@ -52,7 +52,7 @@ class apache(
     ],
   }
 
-  if defined('firewall::rule') {
+  if defined('firewall::rule') and $start_service {
     firewall::rule { 'allow-http-server':
       weight => '375',
       rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT',

@@ -44,6 +44,7 @@ class firewall(
     mode    => '0700',
     recurse => true,
     purge   => true,
+    notify  => Exec['firewall-concat'],
   }
 
   file { "${fragment_dir}/concat.sh":
