@@ -60,7 +60,15 @@ class piranha(
   piranha::markvip { $virtual_ip: }
 
   firewall::rule { 'allow-piranha-gui':
-    weight => '320',
+    weight => '370',
     rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 3636 -j ACCEPT',
+  }
+  firewall::rule { 'allow-piranha-heartbeat-tcp':
+    weight => '371',
+    rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 539 -j ACCEPT',
+  }
+  firewall::rule { 'allow-piranha-heartbeat-udp':
+    weight => '372',
+    rule   => '-A INPUT -p udp -m state --state NEW -m udp --dport 539 -j ACCEPT',
   }
 }
