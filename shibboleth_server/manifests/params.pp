@@ -27,6 +27,6 @@ class shibboleth_server::params {
   
   
   # CHANGE THIS
-  $key_source = '/etc/puppet/private/etc/shibboleth/sp-key.pem'
-  $cert_source = '/etc/puppet/private/etc/shibboleth/sp-cert.pem'
+  $key_source = 'puppet:///private/etc/shibboleth/sp-key.pem'
+  $cert_source = 'puppet:///private/etc/shibboleth/sp-cert.pem'
 }
