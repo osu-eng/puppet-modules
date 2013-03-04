@@ -80,8 +80,9 @@ class aegir (
   
   
   # Apache Bits
-  file { '/etc/httpd/conf.d/aegir.conf':
-    ensure     => 'link',
-    target     => "${home}/config/apache.conf",
-  }
+  # We need this to not be there initially since we're quasi manually installing Aegir
+  # file { '/etc/httpd/conf.d/aegir.conf':
+  #  ensure     => 'link',
+  #  target     => "${home}/config/apache.conf",
+  #}
 }
