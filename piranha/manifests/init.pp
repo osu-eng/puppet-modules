@@ -1,7 +1,8 @@
 class piranha(
   $repo_url = $piranha::params::repo_url,
   $virtual_ip = $piranha::params::virtual_ip,
-  $gui_password = $piranha::params::gui_password
+  $gui_password = $piranha::params::gui_password,
+  $lvs_config = $piranha::params::lvs_config
 ) inherits piranha::params {
   $gpgkey = '/etc/pki/rpm-gpg/RPM-GPG-KEY-rhel-local-lb'
 
@@ -39,6 +40,16 @@ class piranha(
     ensure     => running,
     enable     => true,
     require    => Package['piranha'],
+    subscribe  => File['/etc/sysconfig/ha/lvs.cf'],
+  }
+
+  file { '/etc/sysconfig/ha/lvs.cf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'piranha',
+    mode    => '0664',
+    require => Package['piranha'],
+    content => template('piranha/lvs.cf.erb'),
   }
 
   file { '/etc/sysconfig/ha/conf/piranha.passwd':
