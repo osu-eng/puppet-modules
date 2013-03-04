@@ -35,9 +35,21 @@ class firewall(
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
+    recurse => true,
+    source  => 'puppet:///modules/firewall/fragment_dir',
   }
 
-  file { "${fragment_dir}/fragments":
+  file { "${fragment_dir}/filter":
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0700',
+    recurse => true,
+    purge   => true,
+    notify  => Exec['firewall-concat'],
+  }
+
+  file { "${fragment_dir}/mangle":
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
@@ -52,22 +64,6 @@ class firewall(
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
-    source  => 'puppet:///modules/firewall/concat.sh',
-  }
-
-  file { "${fragment_dir}/firewall-pre":
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    source  => 'puppet:///modules/firewall/firewall-pre',
-  }
-
-  file { "${fragment_dir}/firewall-post":
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    source  => 'puppet:///modules/firewall/firewall-post',
+    source  => 'puppet:///modules/firewall/fragment_dir/concat.sh',
   }
 }
