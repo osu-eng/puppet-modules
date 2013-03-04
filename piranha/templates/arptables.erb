@@ -1,0 +1,12 @@
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/piranha/templates/arptables.erb
+*filter
+:IN ACCEPT [1264:35392]
+:OUT ACCEPT [2:56]
+:FORWARD ACCEPT [0:0]
+<% [@virtual_ip].flatten.each do |vip| -%>
+[0:0] -A IN -d <%= vip %> -j DROP
+[0:0] -A OUT -s <%= vip %> -j mangle --mangle-ip-s <%= @ipaddress %>
+<% end -%>
+COMMIT

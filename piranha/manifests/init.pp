@@ -22,7 +22,7 @@ class piranha(
     source  => 'puppet:///modules/piranha/RPM-GPG-KEY-rhel-local-lb',
   }
 
-  package { 'piranha':
+  package {[ 'piranha', 'ipvsadm' ]:
     ensure  => present,
     require => Yumrepo['rhel-lb'],
   }
