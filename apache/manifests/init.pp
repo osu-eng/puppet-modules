@@ -52,6 +52,11 @@ class apache(
     ],
   }
 
+  selboolean { 'httpd_can_network_connect':
+    value      => on,
+    persistent => true,
+  }
+
   if defined('firewall::rule') and $start_service {
     firewall::rule { 'allow-http-server':
       weight => '375',
