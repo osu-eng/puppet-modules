@@ -90,7 +90,7 @@ class aegir (
   }  
 
   exec { "/bin/ln -s /etc/httpd/conf.d/aegir.conf /${home}/config/apache.conf":
-    creates => "/etc/httpd/conf.d/aegir.conf"
+    creates => "/etc/httpd/conf.d/aegir.conf",
     onlyif => "/usr/bin/test -f /${home}/config/apache.conf",
   }
   
