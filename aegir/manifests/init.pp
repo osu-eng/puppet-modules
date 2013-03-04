@@ -89,7 +89,7 @@ class aegir (
     creates => '/root/aegir-selinux.output'
   }  
 
-  exec { "/bin/ln -s /etc/httpd/conf.d/aegir.conf /${home}/config/apache.conf":
+  exec { "/bin/ln -s /etc/httpd/conf.d/aegir.conf /${home}/config/apache.conf; service httpd restart":
     creates => "/etc/httpd/conf.d/aegir.conf",
     onlyif => "/usr/bin/test -f /${home}/config/apache.conf",
   }
