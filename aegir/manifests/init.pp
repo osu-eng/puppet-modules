@@ -88,6 +88,11 @@ class aegir (
     require => File['/root/aegir-selinux.sh'] ,
     creates => '/root/aegir-selinux.output'
   }  
+
+  exec { "/bin/ln -s /etc/httpd/conf.d/aegir.conf /${home}/config/apache.conf":
+    creates => "/etc/httpd/conf.d/aegir.conf"
+    onlyif => "/usr/bin/test -f /${home}/config/apache.conf",
+  }
   
   # Apache Bits
   # We need this to not be there initially since we're quasi manually installing Aegir
