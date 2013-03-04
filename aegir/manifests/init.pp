@@ -71,18 +71,38 @@ class aegir (
     require    => File["$home/.ssh"]
   }
   
+  
+  
   # This doesn't seem to be working
   sudo::directive {'aegir_apache_restart':
     ensure     => present,
     content    => "$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
     require    => User[$user_name],
   }
+
+  file {'/root/aegir-selinux.sh':
+    source => 'puppet:///modules/aegir/selinux.sh',
+    mode => '0755',
+  }
+
+  exec {'/root/aegir-selinux.output':
+    command => '/root/aegir-selinux.sh > /root/aegir-selinux.output',
+    require => File['/root/aegir-selinux.sh'] ,
+    creates => '/root/aegir-selinux.output'
+  }  
+
+  exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/aegir.conf ; service httpd restart":
+    creates => "/etc/httpd/conf.d/aegir.conf",
+    onlyif => "/usr/bin/test -f ${home}/config/apache.conf",
+  }
+
+  # Various configuration files
+  file { "${home}/.ssh/authorized_keys":
+    ensure  => present,
+    owner      => $user_name,
+    group      => $group_name,
+    mode    => '0644',
+    content => template('aegir/authorized_keys.erb'),
+  }
   
-  
-  # Apache Bits
-  # We need this to not be there initially since we're quasi manually installing Aegir
-  # file { '/etc/httpd/conf.d/aegir.conf':
-  #  ensure     => 'link',
-  #  target     => "${home}/config/apache.conf",
-  #}
 }
