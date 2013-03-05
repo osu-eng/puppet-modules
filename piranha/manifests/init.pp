@@ -25,6 +25,10 @@ class piranha(
     source  => 'puppet:///modules/piranha/RPM-GPG-KEY-rhel-local-lb',
   }
 
+  sysctl { 'net.ipv4.ip_forward':
+    value => '1',
+  }
+
   package {[ 'piranha', 'ipvsadm' ]:
     ensure  => present,
     require => Yumrepo['rhel-lb'],
