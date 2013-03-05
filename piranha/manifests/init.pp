@@ -1,6 +1,7 @@
 class piranha(
   $repo_url = $piranha::params::repo_url,
   $virtual_ip = $piranha::params::virtual_ip,
+  $service_port = $piranha::params::service_port,
   $gui_password = $piranha::params::gui_password,
   $lvs_config = $piranha::params::lvs_config
 ) inherits piranha::params {
@@ -65,14 +66,28 @@ class piranha(
     content => template('piranha/piranha.passwd.erb'),
   }
 
-  define piranha::markvip ($ip = $title) {
+  define piranha::markvip ($ip = $title, $netmask, $interface) {
     firewall::rule { "bundle-http-https-${ip}":
       weight => '110',
       table  => 'mangle',
       rule   => "-A PREROUTING -p tcp -d ${ip}/32 -m multiport --dports 80,443 -j MARK --set-mark 80",
     }
   }
-  piranha::markvip { $virtual_ip: }
+  create_resources(piranha::markvip, $virtual_ip)
+
+  define piranha::service_port ($port = $title) {
+    firewall::rule { "piranha-service-tcp-${port}":
+      weight => '830',
+      table  => 'filter',
+      rule   => "-A INPUT -p tcp -m state --state NEW -m tcp --dport ${port} -j ACCEPT",
+    }
+    firewall::rule { "piranha-service-udp-${port}":
+      weight => '830',
+      table  => 'filter',
+      rule   => "-A INPUT -p udp -m state --state NEW -m udp --dport ${port} -j ACCEPT",
+    }
+  }
+  piranha::service_port { $service_port: }
 
   firewall::rule { 'allow-piranha-gui':
     weight => '370',
