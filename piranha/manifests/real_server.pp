@@ -2,13 +2,11 @@ class piranha::real_server(
   $virtual_ip = hiera('piranha::virtual_ip', $piranha::params::virtual_ip)
 ) inherits piranha::params {
 
-  include network
-
-  create_resources(piranha::add_vip, $virtual_ip)
-
-  package { 'arptables_jf':
+  package {[ 'iproute', 'arptables_jf' ]:
     ensure  => present,
   }
+
+  create_resources(piranha::add_vip, $virtual_ip)
 
   service { 'arptables_jf':
     ensure     => running,
