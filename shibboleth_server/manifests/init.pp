@@ -1,24 +1,16 @@
 class shibboleth_server (
   $entity = $shibboleth_server::params::entity,
-  
   $session_lifetime = $shibboleth_server::params::session_lifetime,
   $session_timeout = $shibboleth_server::params::session_timeout, 
   $session_relay_state = $shibboleth_server::params::session_relay_state,
   $session_check_address = hiera('shibboleth_server::session_check_address', $shibboleth_server::params::session_check_address),
   $session_handler_ssl = hiera('shibboleth_server::session_handler_ssl', $shibboleth_server::params::session_handler_ssl),
   $session_cookie_props = $shibboleth_server::params::session_cookie_props,
-  
   $support_contact = $shibboleth_server::params::support_contact,
-  
   $key_source = $shibboleth_server::params::key_source,
   $cert_source = $shibboleth_server::params::cert_source,
-  
-  # $listener_address = $shibboleth_server::params::listener_address,
-  # $listener_port = $shibboleth_server::params::listener_port,
-  # $listener_acl = $shibboleth_server::params::listener_acl,
-
 ) inherits shibboleth_server::params {
- 
+
   # Important Files 
   $shibboleth2      = '/etc/shibboleth/shibboleth2.xml'
   $attribute_map    = '/etc/shibboleth/attribute-map.xml'
@@ -27,7 +19,7 @@ class shibboleth_server (
   $session_error    = '/etc/shibboleth/sessionError.html'
   $key              = '/etc/shibboleth/sp-key.pem'
   $cert             = '/etc/shibboleth/sp-cert.pem'
-  
+
   # Include Repo and Packages
   include shibboleth_server::repos
   package { 'shibboleth':
@@ -92,5 +84,4 @@ class shibboleth_server (
     mode    => '0644',
     source  => $cert_source,
   }
-  
 }

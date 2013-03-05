@@ -1,5 +1,4 @@
 class shibboleth_server::repos {
-
   yumrepo { 'security_shibboleth':
     descr    => 'Shibboleth (OpenSuse Security) - $basearch',
     baseurl  => 'http://download.opensuse.org/repositories/security:/shibboleth/RHEL_6/',
