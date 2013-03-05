@@ -1,4 +1,4 @@
-define piranha::markvip ($ip = $title, $netmask, $interface) {
+define piranha::mark_vip ($ip = $title, $netmask, $interface) {
   firewall::rule { "bundle-http-https-${ip}":
     weight => '110',
     table  => 'mangle',
