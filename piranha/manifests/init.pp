@@ -66,7 +66,7 @@ class piranha(
     content => template('piranha/piranha.passwd.erb'),
   }
 
-  create_resources(piranha::markvip, $virtual_ip)
+  create_resources(piranha::mark_vip, $virtual_ip)
 
   define piranha::service_port ($port = $title) {
     firewall::rule { "piranha-service-tcp-${port}":
