@@ -4,14 +4,7 @@ class piranha::real_server(
 
   include network
 
-  define piranha::real_server::vip ($ip = $title, $netmask, $interface) {
-    network::if::alias { $interface:
-      ipaddress => $ip,
-      netmask   => $netmask,
-      ensure    => up,
-    }
-  }
-  create_resources(piranha::real_server::vip, $virtual_ip)
+  create_resources(piranha::add_vip, $virtual_ip)
 
   package { 'arptables_jf':
     ensure  => present,
