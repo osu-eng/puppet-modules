@@ -2,16 +2,9 @@
 # Managed by Puppet
 #########################
 
-# We do not manage detailed parts of the mysql configuration
+# We do not manage certain parts of the mysql configuration
 # in puppet mainly because we run a cluster and can't
 # know if the service is on/off on any given box.  
-# So setup that requires "on" is done manually.
-
-# If it's a server not in a cluster, you need to configure the service to be on
-chkconfig mysqld on
-
-# And start the service
-service mysqld start
 
 # If it's a server used by Aegir, you need to create an Aegir account
 mysql -uroot -p -e "grant all privileges on *.* to aegir@'<master-server>.web.engineering.osu.edu' identified by '<aegir-password>';"
@@ -22,8 +15,6 @@ mysql -uroot -p -e "grant all privileges on *.* to aegir@'<master-server>.web.en
 # Here's what running mysql_secure_installation should look like.
 
 # mysql_secure_installation
-
-[root@qa-db little.129]# mysql_secure_installation
 
 NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MySQL
       SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
@@ -83,4 +74,3 @@ All done!  If you've completed all of the above steps, your MySQL
 installation should now be secure.
 
 Thanks for using MySQL!
-

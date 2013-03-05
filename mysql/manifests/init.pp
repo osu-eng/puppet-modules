@@ -1,10 +1,5 @@
-class mysql (
-
-
-) inherits mysql::params {
-
-  package { [ 'mysql' ]:
+class mysql {
+  package { 'mysql':
     ensure => present,
   }
-
 }
