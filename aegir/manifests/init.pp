@@ -39,8 +39,8 @@ class aegir (
     owner      => $user_name,
     group      => $group_name,
     mode       => '0755',
-    seltype    => 'httpd_sys_content_t'
-    require    => [ User[$user_name], Group[$group_name] ]
+    seltype    => 'httpd_sys_content_t',
+    require    => [ User[$user_name], Group[$group_name] ],
   }
 
   file { "${home}/.ssh":
@@ -49,7 +49,7 @@ class aegir (
     group      => $group_name,
     mode       => '0700',
     seltype    => 'var_t',
-    require    => File[$home]
+    require    => File[$home],
   }
 
   file { "${home}/config":
@@ -58,7 +58,7 @@ class aegir (
     group      => $group_name,
     mode       => '0755',
     seltype    => 'httpd_config_t',
-    require    => File[$home]
+    require    => File[$home],
   }
 
   sudo::directive { 'aegir_apache_restart':
