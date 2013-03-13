@@ -14,4 +14,11 @@ class unitrends {
     ]:
     ensure => present
   }
+
+  if defined('firewall::rule') {
+    firewall::rule { 'allow-unitrends-backup':
+      weight => '164',
+      rule   => '-A INPUT -p tcp -m multiport -m state --state NEW -m tcp --dports 1743,1745 -j ACCEPT',
+    }
+  }
 }
