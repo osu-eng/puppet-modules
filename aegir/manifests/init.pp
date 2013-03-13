@@ -18,6 +18,7 @@ class aegir (
 ) inherits aegir::params {
 
   include sudo
+  include selinux
     
   user { $user_name:
     comment    => 'User for the Aegir Hosting System',

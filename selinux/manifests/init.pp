@@ -10,7 +10,7 @@ class selinux(
     fail('SELinux type must be either targeted or enforcing')
   }
 
-  package { ['selinux-policy', 'selinux-policy-targeted']:
+  package { ['selinux-policy', 'selinux-policy-targeted', 'policycoreutils-python']:
     ensure => present,
   }
 
