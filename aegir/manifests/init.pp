@@ -76,7 +76,7 @@ class aegir (
     command => '/root/aegir-selinux.sh > /root/aegir-selinux.output',
     require => [
       File['/root/aegir-selinux.sh'],
-      File["${home"],
+      File["${home}"],
       File["${home}/.ssh"],
       File["${home}/config"],
     ],
