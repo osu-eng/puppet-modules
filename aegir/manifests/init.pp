@@ -39,6 +39,7 @@ class aegir (
     owner      => $user_name,
     group      => $group_name,
     mode       => '0755',
+    seltype    => 'httpd_sys_content_t'
     require    => [ User[$user_name], Group[$group_name] ]
   }
 
@@ -47,6 +48,16 @@ class aegir (
     owner      => $user_name,
     group      => $group_name,
     mode       => '0700',
+    seltype    => 'var_t',
+    require    => File[$home]
+  }
+
+  file { "${home}/config":
+    ensure     => directory,
+    owner      => $user_name,
+    group      => $group_name,
+    mode       => '0755',
+    seltype    => 'httpd_config_t',
     require    => File[$home]
   }
 
@@ -63,8 +74,13 @@ class aegir (
 
   exec { '/root/aegir-selinux.output':
     command => '/root/aegir-selinux.sh > /root/aegir-selinux.output',
-    require => File['/root/aegir-selinux.sh'] ,
-    creates => '/root/aegir-selinux.output'
+    require => [
+      File['/root/aegir-selinux.sh'],
+      File["${home"],
+      File["${home}/.ssh"],
+      File["${home}/config"],
+    ],
+    creates => '/root/aegir-selinux.output',
   }  
 
   exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/aegir.conf ; service httpd restart":
@@ -78,6 +94,7 @@ class aegir (
     owner   => $user_name,
     group   => $group_name,
     mode    => '0644',
+    seltype => 'var_t',
     content => template('aegir/authorized_keys.erb'),
   }
 }
