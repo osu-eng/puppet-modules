@@ -14,4 +14,11 @@ class mysql::params {
   $open_files_limit = 3000
   $tmp_table_size = 200000000
   $max_heap_table_size = 300000000
+
+  $backup_user = 'backup'
+  $backup_password = 'password'
+  $cron = true
+  $purge_days = 30
+  $backup_path = '/root/mysql'
+  $hour = 1
 }

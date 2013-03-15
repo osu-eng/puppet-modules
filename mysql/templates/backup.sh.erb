@@ -1,0 +1,35 @@
+#!/bin/bash
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/mysql/templates/backup.sh.erb
+
+#####
+## Backs up all databses on the local mysql server to the file system.
+#####
+
+# Set our backup error indicator to zero. We will error out if a backup fails.
+backupError=0
+
+echo "Starting backup of all databases"
+
+# Run mysqldump on each database and output to an sql file
+/usr/bin/mysql -u<%= @backup_user %> -p<%= @backup_password %> -e 'show databases' | while read dbname; do
+  echo "Backing up $dbname"...
+  /usr/bin/mysqldump -u<%= @backup_user %> -p<%= @backup_password %> "$dbname" > "<%= @backup_path %>/$dbname".sql
+  if [ $? -ne 0 ]; then
+    backupError=1
+  fi
+done
+
+# Make sure we had no errors. Return an error code if we did.
+if [ $backupError -ne 0 ]; then
+  echo "There was an error backing up one or more databases." 1>&2
+  exit 100
+fi
+
+<% if @purge_days != 0 %>
+# Purge old backups
+/usr/bin/find "<%= @backup_path %>"/*.sql -mtime +<%= @purge_days %> -exec rm {} \;
+<% end %>
+
+exit 0
