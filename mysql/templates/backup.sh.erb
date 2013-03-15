@@ -27,9 +27,9 @@ if [ $backupError -ne 0 ]; then
   exit 100
 fi
 
-<% if @purge_days != 0 %>
+<% if @purge_days != 0 -%>
 # Purge old backups
 /usr/bin/find "<%= @backup_path %>"/*.sql -mtime +<%= @purge_days %> -exec rm {} \;
-<% end %>
+<% end -%>
 
 exit 0
