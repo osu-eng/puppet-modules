@@ -22,7 +22,7 @@ echo "Starting backup of all databases"
 done
 
 # Make sure we had no errors. Return an error code if we did.
-if [ $backupError -ne 0 ]; then
+if [ $backupError -ne 0 ] || [ $? -ne 0 ]; then
   echo "There was an error backing up one or more databases." 1>&2
   exit 100
 fi
