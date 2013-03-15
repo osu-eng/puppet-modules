@@ -2,7 +2,7 @@ class unitrends::mysql {
   include mysql::backup
 
   if $unitrends_directory_exists {
-    file { 'usr/bp/bin/mysql-backup.sh':
+    file { '/usr/bp/bin/mysql-backup.sh':
       ensure  => present,
       owner   => 'root', 
       group   => 'root',
