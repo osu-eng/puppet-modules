@@ -3,8 +3,6 @@ class capistrano(
   $deploy_to = $capistrano::params::deploy_to
 ) inherits capistrano::params {
 
-  include ruby
-
   group { 'deployer':
     ensure => present,
     system => true,
