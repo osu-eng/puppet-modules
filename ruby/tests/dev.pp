@@ -1,1 +1,1 @@
-include ruby::dev
+include ruby
