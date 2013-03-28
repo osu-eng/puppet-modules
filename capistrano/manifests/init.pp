@@ -5,13 +5,19 @@ class capistrano(
 
   include ruby
 
+  group { 'deployer':
+    ensure => present,
+    system => true,
+  }
+
   user { 'deployer':
     ensure     => present,
     gid        => 'deployer',
-    shell      => '/sbin/nologin',
+    shell      => '/bin/bash',
     home       => '/home/deployer',
     managehome => true,
     system     => true,
+    require    => Group['deployer'],
   }
 
   sudo::directive { 'capistrano_deployer':
