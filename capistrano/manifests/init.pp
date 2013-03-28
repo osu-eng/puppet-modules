@@ -3,7 +3,7 @@ class capistrano(
   $deploy_to = $capistrano::params::deploy_to
 ) inherits capistrano::params {
 
-  package { 'capistrano', 'capistrano-rvm':
+  package {[ 'capistrano', 'capistrano-rvm' ]:
     ensure   => present,
     provider => gem,
   }
