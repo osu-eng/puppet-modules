@@ -18,6 +18,7 @@ class capistrano(
     'bison',
     'libxml2-devel',
     'libxslt-devel',
+    'sqlite-devel',
   ]:
     ensure  => present,
     require => Yumrepo['epel'],
