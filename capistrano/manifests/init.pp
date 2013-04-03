@@ -5,7 +5,7 @@ class capistrano(
 
   include epel
 
-  package {[ 'capistrano', 'capistrano-rvm' ]:
+  package {[ 'capistrano', 'capistrano-rvm', 'bundler' ]:
     ensure   => present,
     provider => gem,
   }
