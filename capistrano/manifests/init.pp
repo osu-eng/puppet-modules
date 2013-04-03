@@ -18,7 +18,6 @@ class capistrano(
     'libxslt-devel',
   ]:
     ensure   => present,
-    provider => gem,
   }
 
   group { 'deployer':
