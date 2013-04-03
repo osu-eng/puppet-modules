@@ -1,5 +1,13 @@
 class general {
-  $package_list = [ 'man', 'wget', 'gcc', 'make', 'vim-enhanced', 'git' ]
+  $package_list = [
+    'man',
+    'wget',
+    'gcc',
+    'make',
+    'vim-enhanced',
+    'git',
+    'patch',
+  ]
   $package_blacklist = []
 
   package { $package_list:
