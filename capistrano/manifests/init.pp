@@ -8,6 +8,19 @@ class capistrano(
     provider => gem,
   }
 
+  package {[
+    'readline-devel',
+    'libyaml-devel',
+    'libffi-devel',
+    'libtool',
+    'bison',
+    'libxml2-devel',
+    'libxslt-devel',
+  ]:
+    ensure   => present,
+    provider => gem,
+  }
+
   group { 'deployer':
     ensure => present,
     system => true,
