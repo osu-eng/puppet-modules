@@ -3,6 +3,8 @@ class capistrano(
   $deploy_to = $capistrano::params::deploy_to
 ) inherits capistrano::params {
 
+  include epel
+
   package {[ 'capistrano', 'capistrano-rvm' ]:
     ensure   => present,
     provider => gem,
@@ -17,7 +19,8 @@ class capistrano(
     'libxml2-devel',
     'libxslt-devel',
   ]:
-    ensure   => present,
+    ensure  => present,
+    require => Yumrepo['epel'],
   }
 
   group { 'deployer':
