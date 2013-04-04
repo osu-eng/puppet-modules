@@ -3,25 +3,9 @@ class capistrano(
   $deploy_to = $capistrano::params::deploy_to
 ) inherits capistrano::params {
 
-  include epel
-
-  package {[ 'capistrano', 'capistrano-rvm', 'bundler' ]:
+  package {[ 'capistrano', 'bundler' ]:
     ensure   => present,
     provider => gem,
-  }
-
-  package {[
-    'readline-devel',
-    'libyaml-devel',
-    'libffi-devel',
-    'libtool',
-    'bison',
-    'libxml2-devel',
-    'libxslt-devel',
-    'sqlite-devel',
-  ]:
-    ensure  => present,
-    require => Yumrepo['epel'],
   }
 
   group { 'deployer':
