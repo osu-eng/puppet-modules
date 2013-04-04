@@ -7,7 +7,7 @@ define rubies::ruby ($version = $title) {
   rvm_gem { "${version}-bundler":
     name         => 'bundler',
     ruby_version => "ruby-${version}",
-    ensure       => latest,
+    ensure       => present,
     require      => Rvm_system_ruby["ruby-${version}"];
   }
 }
