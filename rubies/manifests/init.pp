@@ -5,6 +5,6 @@ class rubies(
 
   include rvm
 
-  create_resources(rubies::ruby, $versions)
-  create_resources(rvm::system_user, $rvm_users)
+  rubies::ruby { $versions: }
+  rvm::system_user { $rvm_users: }
 }
