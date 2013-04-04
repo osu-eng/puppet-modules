@@ -1,17 +1,10 @@
-class mail {
-  package { [ 'mailx', 'mailcap', 'sendmail', 'procmail' ]:
-    ensure => present,
-  }
+class rubies(
+  $versions = $rubies::params::versions,
+  $rvm_users = $rubies::params::rvm_users
+) inherits rubies::params {
 
-  package { [ 'exim', 'postfix' ]:
-    ensure => absent
-  }
+  include rvm
 
-  service { 'sendmail':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    hasstatus  => true,
-    require    => Package['sendmail'],
-  }
+  create_resources(rubies::ruby, $versions)
+  create_resources(rvm::system_user, $rvm_users)
 }
