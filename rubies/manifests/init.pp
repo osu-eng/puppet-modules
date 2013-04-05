@@ -8,6 +8,12 @@ class rubies(
 
   $packages = [ 'libyaml-devel', 'libffi-devel', 'libtool', 'bison' ]
 
+  file { '/usr/local/rvm':
+    ensure  => directory,
+    seltype => 'httpd_sys_content_t',
+    recurse => true,
+  }
+
   package { $packages:
     ensure => present,
   }
