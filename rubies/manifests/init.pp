@@ -19,6 +19,20 @@ class rubies(
     value      => on,
   }
 
+  file { '/usr/share/selinux/targeted/passenger.pp':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    source  => 'puppet:///modules/rubies/passenger.pp',
+  }
+
+  selmodule { 'passenger':
+    ensure      => present,
+    syncversion => true,
+    require     => File['/usr/share/selinux/targeted/passenger.pp'],
+  }
+
   exec { 'rvm-selinux':
     command => '/root/rvm-selinux.sh > /root/rvm-selinux.output',
     require => [

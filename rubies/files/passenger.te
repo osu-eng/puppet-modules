@@ -1,0 +1,15 @@
+
+module passenger 1.0;
+
+require {
+  type user_devpts_t;
+  type httpd_sys_script_t;
+  class process setpgid;
+  class capability { sys_resource chown setuid dac_read_search setgid sys_nice fowner dac_override };
+  class chr_file { read write ioctl getattr };
+}
+
+#============= httpd_sys_script_t ==============
+allow httpd_sys_script_t self:capability { sys_resource chown setuid dac_read_search setgid sys_nice fowner dac_override };
+allow httpd_sys_script_t self:process setpgid;
+allow httpd_sys_script_t user_devpts_t:chr_file { read write ioctl getattr };
