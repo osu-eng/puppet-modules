@@ -24,7 +24,7 @@ class rubies(
     require => [
       File['/root/rvm-selinux.sh'],
     ],
-    creates => '/root/aegir-selinux.output',
+    creates => '/root/rvm-selinux.output',
   }
 
   package { $packages:
