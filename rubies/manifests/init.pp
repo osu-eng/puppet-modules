@@ -13,12 +13,10 @@ class rubies(
   }
 
   rubies::ruby { $versions:
-    ensure  => present,
     require => Package[$packages],
   }
 
   rvm::system_user { $rvm_users:
-    ensure  => present,
     require => Package[$packages],
   }
 }
