@@ -5,13 +5,26 @@ class rubies(
 
   include epel
   include rvm
+  include selinux
 
   $packages = [ 'libyaml-devel', 'libffi-devel', 'libtool', 'bison' ]
 
-  file { '/usr/local/rvm':
-    ensure  => directory,
-    seltype => 'httpd_sys_content_t',
-    recurse => true,
+  file { '/root/rvm-selinux.sh':
+    source => 'puppet:///modules/rubies/rvm-selinux.sh',
+    mode   => '0755',
+  }
+
+  selboolean { 'httpd_run_stickshift':
+    persistent => true,
+    value      => on,
+  }
+
+  exec { 'rvm-selinux':
+    command => '/root/rvm-selinux.sh > /root/rvm-selinux.output',
+    require => [
+      File['/root/rvm-selinux.sh'],
+    ],
+    creates => '/root/aegir-selinux.output',
   }
 
   package { $packages:
