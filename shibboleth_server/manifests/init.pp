@@ -72,9 +72,9 @@ class shibboleth_server (
   }
   file { $key:
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    owner   => 'shibd',
+    group   => 'shibd',
+    mode    => '0400',
     source  => $key_source,
   }
   file { $cert:
