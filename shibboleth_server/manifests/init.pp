@@ -22,6 +22,7 @@ class shibboleth_server (
   $cert             = '/etc/shibboleth/sp-cert.pem'
 
   # Include Repo and Packages
+  include apache
   include shibboleth_server::repos
   package { 'shibboleth':
     ensure => present,
@@ -42,6 +43,7 @@ class shibboleth_server (
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/shibboleth_server/shib.conf',
+    notify  => Service['httpd'],
   }
   # Various configuration files
   file { $shibboleth2:
