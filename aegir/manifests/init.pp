@@ -19,7 +19,7 @@ class aegir (
 
   include sudo
   include selinux
-    
+
   user { $user_name:
     comment    => 'User for the Aegir Hosting System',
     home       => '/var/aegir',
@@ -81,10 +81,10 @@ class aegir (
       File["${home}/config"],
     ],
     creates => '/root/aegir-selinux.output',
-  }  
+  }
 
-  exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/aegir.conf ; service httpd restart":
-    creates => "/etc/httpd/conf.d/aegir.conf",
+  exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/z-aegir.conf ; service httpd restart":
+    creates => "/etc/httpd/conf.d/z-aegir.conf",
     onlyif  => "/usr/bin/test -f ${home}/config/apache.conf",
   }
 
