@@ -95,4 +95,18 @@ class shibboleth_server (
     mode    => '0644',
     source  => $cert_source,
   }
+
+  file { '/usr/share/selinux/targeted/shibapache.pp':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    source  => 'puppet:///modules/shibboleth_server/shibapache.pp',
+  }
+
+  selmodule { 'shibapache':
+    ensure      => present,
+    syncversion => true,
+    require     => File['/usr/share/selinux/targeted/shibapache.pp'],
+  }
 }
