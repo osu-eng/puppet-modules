@@ -20,6 +20,7 @@ class aegir (
   include sudo
   include selinux
 
+
   user { $user_name:
     comment    => 'User for the Aegir Hosting System',
     home       => '/var/aegir',
@@ -73,14 +74,14 @@ class aegir (
   }
 
   exec { '/root/aegir-selinux.output':
-    command => '/root/aegir-selinux.sh > /root/aegir-selinux.output',
+    command => '/root/aegir-selinux.sh > /root/aegir-selinux.output2',
     require => [
       File['/root/aegir-selinux.sh'],
       File["${home}"],
       File["${home}/.ssh"],
       File["${home}/config"],
     ],
-    creates => '/root/aegir-selinux.output',
+    creates => '/root/aegir-selinux.output2',
   }
 
   exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/z-aegir.conf ; service httpd restart":
