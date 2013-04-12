@@ -12,6 +12,7 @@ class shibboleth_server (
 ) inherits shibboleth_server::params {
 
   # Important Files
+  $shib_conf        = '/etc/httpd/conf.d/shib.conf'
   $shibboleth2      = '/etc/shibboleth/shibboleth2.xml'
   $attribute_map    = '/etc/shibboleth/attribute-map.xml'
   $attribute_policy = '/etc/shibboleth/OSU-attribute-policy.xml'
@@ -34,6 +35,14 @@ class shibboleth_server (
     subscribe  => File[$shibboleth2, $attribute_map, $attribute_policy, $metadata, $session_error, $key, $cert],
   }
 
+  # Various configuration files
+  file { $shib_conf:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/shibboleth_server/shib.conf',
+  }
   # Various configuration files
   file { $shibboleth2:
     ensure  => present,
