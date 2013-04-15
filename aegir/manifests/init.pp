@@ -49,7 +49,7 @@ class aegir (
     owner      => $user_name,
     group      => $group_name,
     mode       => '0700',
-    seltype    => 'var_t',
+    seltype    => 'ssh_home_t',
     require    => File[$home],
   }
 
