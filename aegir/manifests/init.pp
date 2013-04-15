@@ -95,7 +95,7 @@ class aegir (
     owner   => $user_name,
     group   => $group_name,
     mode    => '0644',
-    seltype => 'var_t',
+    seltype => 'ssh_home_t',
     content => template('aegir/authorized_keys.erb'),
   }
 }
