@@ -64,7 +64,7 @@ class aegir (
 
   sudo::directive { 'aegir_apache_restart':
     ensure     => present,
-    content    => "$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
+    content    => "Defaults:aegir  !requiretty\n$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
     require    => User[$user_name],
   }
 
