@@ -19,7 +19,8 @@ class aegir (
 
   include sudo
   include selinux
-    
+
+
   user { $user_name:
     comment    => 'User for the Aegir Hosting System',
     home       => '/var/aegir',
@@ -48,7 +49,7 @@ class aegir (
     owner      => $user_name,
     group      => $group_name,
     mode       => '0700',
-    seltype    => 'var_t',
+    seltype    => 'ssh_home_t',
     require    => File[$home],
   }
 
@@ -63,7 +64,7 @@ class aegir (
 
   sudo::directive { 'aegir_apache_restart':
     ensure     => present,
-    content    => "$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
+    content    => "Defaults:aegir  !requiretty\n$user_name ALL=(ALL) NOPASSWD: /usr/sbin/apachectl",
     require    => User[$user_name],
   }
 
@@ -73,18 +74,18 @@ class aegir (
   }
 
   exec { '/root/aegir-selinux.output':
-    command => '/root/aegir-selinux.sh > /root/aegir-selinux.output',
+    command => '/root/aegir-selinux.sh > /root/aegir-selinux.output2',
     require => [
       File['/root/aegir-selinux.sh'],
       File["${home}"],
       File["${home}/.ssh"],
       File["${home}/config"],
     ],
-    creates => '/root/aegir-selinux.output',
-  }  
+    creates => '/root/aegir-selinux.output2',
+  }
 
-  exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/aegir.conf ; service httpd restart":
-    creates => "/etc/httpd/conf.d/aegir.conf",
+  exec { "/bin/ln -s ${home}/config/apache.conf /etc/httpd/conf.d/z-aegir.conf ; service httpd restart":
+    creates => "/etc/httpd/conf.d/z-aegir.conf",
     onlyif  => "/usr/bin/test -f ${home}/config/apache.conf",
   }
 
@@ -94,7 +95,7 @@ class aegir (
     owner   => $user_name,
     group   => $group_name,
     mode    => '0644',
-    seltype => 'var_t',
+    seltype => 'ssh_home_t',
     content => template('aegir/authorized_keys.erb'),
   }
 }

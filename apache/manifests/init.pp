@@ -48,7 +48,10 @@ class apache(
     require    => Package['httpd'],
     subscribe  => [
         File['/etc/httpd/conf/httpd.conf'],
-        File['/etc/httpd/conf.d/ssl.conf']
+        File['/etc/httpd/conf.d/ssl.conf'],
+        File['/etc/httpd/conf/public.cert'],
+        File['/etc/httpd/conf/ca-chain.cert'],
+        File['/etc/httpd/conf/private.key']
     ],
   }
 
@@ -85,11 +88,27 @@ class apache(
     source  => 'puppet:///modules/apache/ssl.conf',
   }
 
+  file { '/etc/httpd/conf/public.cert':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///private/etc/httpd/conf/public.cert',
+  }
+
   file { '/etc/httpd/conf/ca-chain.cert':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/apache/ca-chain.cert',
+    source  => 'puppet:///private/etc/httpd/conf/ca-chain.cert',
+  }
+
+  file { '/etc/httpd/conf/private.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///private/etc/httpd/conf/private.key',
   }
 }

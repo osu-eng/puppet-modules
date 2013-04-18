@@ -1,7 +1,7 @@
 class shibboleth_server (
   $entity = $shibboleth_server::params::entity,
   $session_lifetime = $shibboleth_server::params::session_lifetime,
-  $session_timeout = $shibboleth_server::params::session_timeout, 
+  $session_timeout = $shibboleth_server::params::session_timeout,
   $session_relay_state = $shibboleth_server::params::session_relay_state,
   $session_check_address = hiera('shibboleth_server::session_check_address', $shibboleth_server::params::session_check_address),
   $session_handler_ssl = hiera('shibboleth_server::session_handler_ssl', $shibboleth_server::params::session_handler_ssl),
@@ -11,7 +11,8 @@ class shibboleth_server (
   $cert_source = $shibboleth_server::params::cert_source,
 ) inherits shibboleth_server::params {
 
-  # Important Files 
+  # Important Files
+  $shib_conf        = '/etc/httpd/conf.d/shib.conf'
   $shibboleth2      = '/etc/shibboleth/shibboleth2.xml'
   $attribute_map    = '/etc/shibboleth/attribute-map.xml'
   $attribute_policy = '/etc/shibboleth/OSU-attribute-policy.xml'
@@ -21,12 +22,13 @@ class shibboleth_server (
   $cert             = '/etc/shibboleth/sp-cert.pem'
 
   # Include Repo and Packages
+  include apache
   include shibboleth_server::repos
   package { 'shibboleth':
     ensure => present,
   }
 
-  # Enable Service 
+  # Enable Service
   service { 'shibd':
     ensure     => 'running',
     enable     => true,
@@ -35,20 +37,29 @@ class shibboleth_server (
   }
 
   # Various configuration files
+  file { $shib_conf:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/shibboleth_server/shib.conf',
+    notify  => Service['httpd'],
+  }
+  # Various configuration files
   file { $shibboleth2:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template('shibboleth_server/shibboleth2.xml.erb'),
-  }    
+  }
   file { $attribute_map:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/shibboleth_server/attribute-map.xml',
-  }  
+  }
   file { $attribute_policy:
     ensure  => present,
     owner   => 'root',
@@ -62,19 +73,19 @@ class shibboleth_server (
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/shibboleth_server/OSU-metadata.pem',
-  }    
+  }
   file { $session_error:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template('shibboleth_server/sessionError.html.erb'),
-  }  
+  }
   file { $key:
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
+    owner   => 'shibd',
+    group   => 'shibd',
+    mode    => '0400',
     source  => $key_source,
   }
   file { $cert:
@@ -83,5 +94,19 @@ class shibboleth_server (
     group   => 'root',
     mode    => '0644',
     source  => $cert_source,
+  }
+
+  file { '/usr/share/selinux/targeted/shibapache.pp':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    source  => 'puppet:///modules/shibboleth_server/shibapache.pp',
+  }
+
+  selmodule { 'shibapache':
+    ensure      => present,
+    syncversion => true,
+    require     => File['/usr/share/selinux/targeted/shibapache.pp'],
   }
 }
