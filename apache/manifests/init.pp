@@ -40,7 +40,7 @@ class apache(
   }
 
   if $log_exclude_ip {
-    $formatted_log_exclude_ip = regsubst($log_exclude_ip, '\.', '\\\\\.', 'G')
+    $formatted_log_exclude_ip = regsubst($log_exclude_ip, '\.', '\\\.', 'G')
   }
 
   package { [ 'httpd', 'mod_ssl' ]:
