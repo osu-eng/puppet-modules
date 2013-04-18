@@ -11,7 +11,8 @@ class apache(
   $avg_child_memory       = $apache::params::avg_child_memory,
   $reserved_memory        = $apache::params::reserved_memory,
   $max_clients            = $apache::params::max_clients,
-  $start_service          = hiera('apache::start_service', $apache::params::start_service)
+  $start_service          = hiera('apache::start_service', $apache::params::start_service),
+  $log_exclude_ip         = $apache::params::log_exclude_ip
 ) inherits apache::params {
 
   # We need to get system memory in MB as an integer
@@ -36,6 +37,10 @@ class apache(
     $keepalive_used = 'On'
   } else {
     $keepalive_used = 'Off'
+  }
+
+  if $log_exclude_ip {
+    $formatted_log_exclude_ip = regsubst($log_exclude_ip, '\.', '\\\\\.', 'G')
   }
 
   package { [ 'httpd', 'mod_ssl' ]:

@@ -449,6 +449,11 @@ DefaultType text/plain
     MIMEMagicFile conf/magic
 </IfModule>
 
+# Exclude log entries from certain IP addresses
+<% [formatted_log_exclude_ip].flatten.each do |exclude_ip| -%>
+SetEnvIf Remote_Addr "<%= exclude_ip %>" dontlog
+<% end -%>
+
 #
 # HostnameLookups: Log the names of clients or just their IP addresses
 # e.g., www.apache.org (on) or 204.62.129.132 (off).
@@ -485,7 +490,7 @@ HostnameLookups Off
 # logged here.  If you *do* define an error logfile for a <VirtualHost>
 # container, that host's errors will be logged there and not here.
 #
-ErrorLog logs/error_log
+ErrorLog logs/error_log env=!dontlog
 
 #
 # LogLevel: Control the number of messages logged to the error_log.
@@ -527,7 +532,7 @@ LogFormat "%{User-agent}i" agent
 # For a single logfile with access, agent, and referer information
 # (Combined Logfile Format), use the following directive:
 #
-CustomLog logs/access_log combined
+CustomLog logs/access_log combined env=!dontlog
 
 #
 # Optionally add a line containing the server version and virtual host

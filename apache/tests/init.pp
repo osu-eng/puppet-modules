@@ -10,4 +10,5 @@ class { 'apache':
   max_requests_per_child => 4000,
   avg_child_memory       => 32,
   reserved_memory        => 256,
+  log_exclude_ip         => [],
 }

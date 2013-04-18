@@ -12,4 +12,5 @@ class apache::params {
   $reserved_memory        = 256
   $max_clients            = undef
   $start_service          = true
+  $log_exclude_ip         = []
 }
