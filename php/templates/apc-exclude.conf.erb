@@ -1,0 +1,9 @@
+###  THIS FILE IS MANAGED BY PUPPET!
+###  Manual changes will be overwritten.
+###  See modules/php/templates/apc-exclude.conf.erb
+
+<% [cache_exclude].flatten.each do |directory| -%>
+<Directory <%= directory %>>
+  php_flag apc.cache_by_default Off
+</Directory>
+<% end -%>

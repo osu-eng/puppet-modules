@@ -5,5 +5,6 @@ class php::params {
   $post_max_size = 25
   $upload_max_filesize = 25
   $cache_memory = 128
+  $cache_exclude = []
   $stat = true
 }
