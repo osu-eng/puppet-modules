@@ -72,26 +72,26 @@ class piranha(
     firewall::rule { "piranha-service-tcp-${port}":
       weight => '830',
       table  => 'filter',
-      rule   => "-A INPUT -p tcp -m state --state NEW -m tcp --dport ${port} -j ACCEPT",
+      rule   => "-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport ${port} -j ACCEPT",
     }
     firewall::rule { "piranha-service-udp-${port}":
       weight => '830',
       table  => 'filter',
-      rule   => "-A INPUT -p udp -m state --state NEW -m udp --dport ${port} -j ACCEPT",
+      rule   => "-A INPUT -p udp -m state --state NEW,ESTABLISHED -m udp --dport ${port} -j ACCEPT",
     }
   }
   piranha::service_port { $service_port: }
 
   firewall::rule { 'allow-piranha-gui':
     weight => '370',
-    rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 3636 -j ACCEPT',
+    rule   => '-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 3636 -j ACCEPT',
   }
   firewall::rule { 'allow-piranha-heartbeat-tcp':
     weight => '371',
-    rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 539 -j ACCEPT',
+    rule   => '-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 539 -j ACCEPT',
   }
   firewall::rule { 'allow-piranha-heartbeat-udp':
     weight => '372',
-    rule   => '-A INPUT -p udp -m state --state NEW -m udp --dport 539 -j ACCEPT',
+    rule   => '-A INPUT -p udp -m state --state NEW,ESTABLISHED -m udp --dport 539 -j ACCEPT',
   }
 }

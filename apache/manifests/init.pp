@@ -63,11 +63,11 @@ class apache(
   if defined('firewall::rule') and $start_service {
     firewall::rule { 'allow-http-server':
       weight => '375',
-      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT',
+      rule   => '-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 80 -j ACCEPT',
     }
     firewall::rule { 'allow-https-server':
       weight => '376',
-      rule   => '-A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT',
+      rule   => '-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 443 -j ACCEPT',
     }
   }
 
