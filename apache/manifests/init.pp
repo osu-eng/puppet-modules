@@ -81,21 +81,13 @@ class apache(
   }
 
   if $use_ssl {
-    Service['httpd'] {
-      subscribe +> [
-        File['/etc/httpd/conf.d/ssl.conf'],
-        File['/etc/httpd/conf/public.cert'],
-        File['/etc/httpd/conf/ca-chain.cert'],
-        File['/etc/httpd/conf/private.key']
-      ],
-    }
-
     file { '/etc/httpd/conf.d/ssl.conf':
       ensure  => present,
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
       source  => 'puppet:///modules/apache/ssl.conf',
+      notify  => Service['httpd'],
     } 
 
     file { '/etc/httpd/conf/public.cert':
@@ -104,6 +96,7 @@ class apache(
       group   => 'root',
       mode    => '0644',
       source  => 'puppet:///private/etc/httpd/conf/public.cert',
+      notify  => Service['httpd'],
     } 
 
     file { '/etc/httpd/conf/ca-chain.cert':
@@ -112,6 +105,7 @@ class apache(
       group   => 'root',
       mode    => '0644',
       source  => 'puppet:///private/etc/httpd/conf/ca-chain.cert',
+      notify  => Service['httpd'],
     } 
 
     file { '/etc/httpd/conf/private.key':
@@ -120,6 +114,7 @@ class apache(
       group   => 'root',
       mode    => '0644',
       source  => 'puppet:///private/etc/httpd/conf/private.key',
+      notify  => Service['httpd'],
     }
   }
 }
