@@ -52,13 +52,7 @@ class apache(
     ensure     => $start_service,
     enable     => $start_service,
     require    => Package['httpd'],
-    subscribe  => [
-        File['/etc/httpd/conf/httpd.conf'],
-        File['/etc/httpd/conf.d/ssl.conf'],
-        File['/etc/httpd/conf/public.cert'],
-        File['/etc/httpd/conf/ca-chain.cert'],
-        File['/etc/httpd/conf/private.key']
-    ],
+    subscribe  => File['/etc/httpd/conf/httpd.conf'],
   }
 
   selboolean { 'httpd_can_network_connect':
@@ -87,6 +81,15 @@ class apache(
   }
 
   if $use_ssl {
+    Service['httpd'] {
+      subscribe +> [
+        File['/etc/httpd/conf.d/ssl.conf'],
+        File['/etc/httpd/conf/public.cert'],
+        File['/etc/httpd/conf/ca-chain.cert'],
+        File['/etc/httpd/conf/private.key']
+      ],
+    }
+
     file { '/etc/httpd/conf.d/ssl.conf':
       ensure  => present,
       owner   => 'root',
