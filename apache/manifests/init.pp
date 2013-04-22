@@ -11,6 +11,7 @@ class apache(
   $avg_child_memory       = $apache::params::avg_child_memory,
   $reserved_memory        = $apache::params::reserved_memory,
   $max_clients            = $apache::params::max_clients,
+  $use_ssl                = hiera('apache::use_ssl', $apache::params::use_ssl),
   $start_service          = hiera('apache::start_service', $apache::params::start_service),
   $log_exclude_ip         = $apache::params::log_exclude_ip
 ) inherits apache::params {
@@ -85,35 +86,37 @@ class apache(
     content => template('apache/httpd.conf.erb'),
   }
 
-  file { '/etc/httpd/conf.d/ssl.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/apache/ssl.conf',
-  }
+  if $use_ssl {
+    file { '/etc/httpd/conf.d/ssl.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/apache/ssl.conf',
+    } 
 
-  file { '/etc/httpd/conf/public.cert':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///private/etc/httpd/conf/public.cert',
-  }
+    file { '/etc/httpd/conf/public.cert':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///private/etc/httpd/conf/public.cert',
+    } 
 
-  file { '/etc/httpd/conf/ca-chain.cert':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///private/etc/httpd/conf/ca-chain.cert',
-  }
+    file { '/etc/httpd/conf/ca-chain.cert':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///private/etc/httpd/conf/ca-chain.cert',
+    } 
 
-  file { '/etc/httpd/conf/private.key':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///private/etc/httpd/conf/private.key',
+    file { '/etc/httpd/conf/private.key':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///private/etc/httpd/conf/private.key',
+    }
   }
 }

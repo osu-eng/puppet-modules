@@ -2,11 +2,11 @@
 ###  Manual changes will be overwritten.
 ###  See modules/piranha/templates/arptables.erb
 *filter
-:IN ACCEPT [1264:35392]
-:OUT ACCEPT [2:56]
+:IN ACCEPT [5882:164696]
+:OUT ACCEPT [13:364]
 :FORWARD ACCEPT [0:0]
 <% @virtual_ip.each_pair do |vip, values| -%>
-[0:0] -A IN -d <%= vip %> -j DROP
-[0:0] -A OUT -s <%= vip %> -j mangle --mangle-ip-s <%= @ipaddress %>
+-A IN -d <%= vip %> -j DROP
+-A OUT -d <%= vip %> -j mangle --mangle-ip-s <%= @ipaddress %>
 <% end -%>
 COMMIT

@@ -11,6 +11,7 @@ class apache::params {
   $avg_child_memory       = 32
   $reserved_memory        = 256
   $max_clients            = undef
+  $use_ssl                = true
   $start_service          = true
   $log_exclude_ip         = []
 }
