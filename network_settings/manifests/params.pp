@@ -6,6 +6,7 @@ class network_settings::params {
   $netmask   = '255.255.255.0'
   $gateway   = '192.168.1.1'
   $state     = 'up'
+  $use_ipv6  = true
 
   $ip_hash = hiera('network_settings::site', false)
   if $ip_hash {

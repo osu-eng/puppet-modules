@@ -6,11 +6,21 @@ class network_settings(
   $netmask   = $network_settings::params::netmask,
   $gateway   = $network_settings::params::gateway,
   $state     = $network_settings::params::state,
+  $use_ipv6  = hiera('network_settings::use_ipv6', $network_settings::params::use_ipv6),
   $ip        = $network_settings::params::ip
 ) inherits network_settings::params {
 
   include network
   $macvar = "<%= scope.lookupvar('::macaddress_${interface}') %>"
+
+  if !$use_ipv6 {
+    sysctl { 'net.ipv6.conf.all.disable_ipv6':
+      value => '1',
+    }
+    sysctl { 'net.ipv6.conf.default.disable_ipv6':
+      value => '1',
+    }
+  }
 
   network::if::static { $interface:
     ipaddress  => $ip,

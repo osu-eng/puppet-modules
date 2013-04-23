@@ -29,6 +29,9 @@ class piranha(
   sysctl { 'net.ipv4.ip_forward':
     value => '1',
   }
+  sysctl { 'net.ipv6.conf.all.disable_ipv6':
+    value => '1',
+  }
 
   package {[ 'piranha', 'ipvsadm' ]:
     ensure  => present,

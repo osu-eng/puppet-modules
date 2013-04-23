@@ -1,0 +1,5 @@
+NETWORKING=yes
+<% if !@use_ipv6 -%>
+NETWORKING_IPV6=no
+<% end -%>
+HOSTNAME=<%= @fqdn %>
