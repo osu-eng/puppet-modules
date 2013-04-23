@@ -116,5 +116,9 @@ class apache(
       source  => 'puppet:///private/etc/httpd/conf/private.key',
       notify  => Service['httpd'],
     }
+  } else {
+    file { '/etc/httpd/conf.d/ssl.conf':
+      ensure  => absent,
+    } 
   }
 }
