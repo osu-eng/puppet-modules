@@ -100,8 +100,6 @@ class logstash(
   anchor {'logstash::end': }
 
 
-  include logstash::repos
-
   #### Validate parameters
 
   # ensure
