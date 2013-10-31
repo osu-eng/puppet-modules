@@ -7,6 +7,7 @@ class general {
     'vim-enhanced',
     'git',
     'patch',
+    'clamav',
   ]
   $package_blacklist = []
 
