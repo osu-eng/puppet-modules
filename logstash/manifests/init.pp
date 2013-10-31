@@ -99,6 +99,15 @@ class logstash(
   anchor {'logstash::begin': }
   anchor {'logstash::end': }
 
+  # This version of logstash module doesn't support complex conditionals so hacked in conf files
+  file { '/etc/logstash/agent/config/custom-syslog-filter':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/logstash/custom-syslog-filter',
+    notify  => Service['logstash-agent'],
+  }
 
   #### Validate parameters
 
