@@ -26,14 +26,14 @@ class aegir::master (
     require    => Package['php-pear'],
   }
   pear::package { 'drush':
-    version    => '4.6.0',
+    version    => '5.9.0',
     repository => 'pear.drush.org',
     require    => Pear::Package['Console_Table']
   }
 
   # Download provision with drush 
   exec { 'provision_install':
-    command => "/usr/bin/sudo -uaegir /usr/bin/drush dl --yes --destination=${dot_drush} provision-6.x",
+    command => "/usr/bin/sudo -uaegir /usr/bin/drush dl --yes --destination=${dot_drush} provision-2.0-rc5",
     creates => "${dot_drush}/provision",
   }
 
