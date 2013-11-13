@@ -1,36 +1,31 @@
+# Deprecated class
 class mysql::backup (
-  $backup_user = $mysql::params::backup_user,
-  $backup_password = $mysql::params::backup_password,
-  $backup_path = $mysql::params::backup_path,
-  $purge_days = $mysql::params::purge_days,
-  $hour = $mysql::params::hour,
-  $cron = hiera('mysql::backup::cron', $mysql::params::cron)
-) inherits mysql::params {
+  $backupuser,
+  $backuppassword,
+  $backupdir,
+  $backupcompress = true,
+  $backuprotate = 30,
+  $delete_before_dump = false,
+  $backupdatabases = [],
+  $file_per_database = false,
+  $ensure = 'present',
+  $time = ['23', '5'],
+) {
 
-  include mysql
+  crit("This class has been deprecated and callers should directly call
+  mysql::server::backup now.")
 
-  file { "${backup_path}":
-    ensure  => directory,
-    owner   => 'root', 
-    group   => 'root',
-    mode    => '0750',
+  class { 'mysql::server::backup':
+    ensure             => $ensure,
+    backupuser         => $backupuser,
+    backuppassword     => $backuppassword,
+    backupdir          => $backupdir,
+    backupcompress     => $backupcompress,
+    backuprotate       => $backuprotate,
+    delete_before_dump => $delete_before_dump,
+    backupdatabases    => $backupdatabases,
+    file_per_database  => $file_per_database,
+    time               => $time,
   }
 
-  file { "${backup_path}/backup.sh":
-    ensure  => present,
-    owner   => 'root', 
-    group   => 'root',
-    mode    => '0750',
-    content => template('mysql/backup.sh.erb'),
-  }
-
-  if $cron {
-    cron { 'mysql-backup':
-      command => "${backup_path}/backup.sh",
-      user    => 'root',
-      hour    => $hour,
-      minute  => 0,
-      require => File["${backup_path}/backup.sh"],
-    }
-  }
 }

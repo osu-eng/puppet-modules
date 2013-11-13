@@ -1,8 +1,8 @@
-class mysql::backup (
-  backup_user     => 'backup',
-  backup_password => 'password',
-  cron            => true,
-  purge_days      => '30',
-  backup_path     => '/root/mysql',
-  hour            => '1',
+class { 'mysql::server':
+  config_hash => {'root_password' => 'password'}
+}
+class { 'mysql::backup':
+  backupuser     => 'myuser',
+  backuppassword => 'mypassword',
+  backupdir      => '/tmp/backups',
 }

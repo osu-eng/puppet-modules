@@ -1,57 +1,69 @@
+# Class: mysql::server:  See README.md for documentation.
 class mysql::server (
-  $start_server = hiera('mysql::server::start_server', $mysql::params::start_server),
-  $allowed_network = $mysql::params::allowed_network,
-  $symbolic_links = $mysql::params::symbolic_links,
-  $old_passwords = $mysql::params::old_passwords,
-  $max_allowed_packet = $mysql::params::max_allowed_packet,
-  $lower_case_table_names = $mysql::params::lower_case_table_names,
-  $long_query_time = $mysql::params::long_query_time,
-  $innodb_buffer_pool_size = $mysql::params::innodb_buffer_pool_size,
-  $key_buffer_size = $mysql::params::key_buffer_size,
-  $query_cache_type = $mysql::params::query_cache_type,
-  $query_cache_size = $mysql::params::query_cache_size,
-  $table_cache = $mysql::params::table_cache,
-  $open_files_limit = $mysql::params::open_files_limit,
-  $tmp_table_size = $mysql::params::tmp_table_size,
-  $max_heap_table_size = $mysql::params::max_heap_table_size
+  $config_file             = $mysql::params::config_file,
+  $manage_config_file      = $mysql::params::manage_config_file,
+  $old_root_password       = $mysql::params::old_root_password,
+  $override_options        = {},
+  $package_ensure          = $mysql::params::server_package_ensure,
+  $package_name            = $mysql::params::server_package_name,
+  $purge_conf_dir          = $mysql::params::purge_conf_dir,
+  $remove_default_accounts = false,
+  $restart                 = $mysql::params::restart,
+  $root_group              = $mysql::params::root_group,
+  $root_password           = $mysql::params::root_password,
+  $service_enabled         = $mysql::params::server_service_enabled,
+  $service_manage          = $mysql::params::server_service_manage,
+  $service_name            = $mysql::params::server_service_name,
+  $service_provider        = $mysql::params::server_service_provider,
+  $users                   = {},
+  $grants                  = {},
+  $databases               = {},
+
+  # Deprecated parameters
+  $enabled                 = undef,
+  $manage_service          = undef
 ) inherits mysql::params {
 
-  include mysql
-
-  package { 'mysql-server':
-    ensure => present,
+  # Deprecated parameters.
+  if $enabled {
+    crit('This parameter has been renamed to service_enabled.')
+    $real_service_enabled = $enabled
+  } else {
+    $real_service_enabled = $service_enabled
+  }
+  if $manage_service {
+    crit('This parameter has been renamed to service_manage.')
+    $real_service_manage = $manage_service
+  } else {
+    $real_service_manage = $service_manage
   }
 
-  if $start_server {
-    service { 'mysql':
-      ensure     => running,
-      enable     => true,
-      require    => Package['mysql-server'],
-      subscribe  => File['/etc/my.cnf'],
+  # Create a merged together set of options.  Rightmost hashes win over left.
+  $options = mysql_deepmerge($mysql::params::default_options, $override_options)
+
+  Class['mysql::server::root_password'] -> Mysql::Db <| |>
+
+  include '::mysql::server::install'
+  include '::mysql::server::config'
+  include '::mysql::server::service'
+  include '::mysql::server::root_password'
+  include '::mysql::server::providers'
+
+  if $remove_default_accounts {
+    class { '::mysql::server::account_security':
+      require => Anchor['mysql::server::end'],
     }
   }
-  
-  file { '/etc/my.cnf':
-    ensure  => present,
-    owner   => 'root', 
-    group   => 'root',
-    mode    => '0644',
-    require => Package['mysql-server'],
-    content => template('mysql/my.cnf.erb'),
-  }
-  
-  if defined('firewall::rule') {
-    firewall::rule { 'allow-mysql':
-      weight => '725',
-      rule   => "-A INPUT -s ${$allowed_network} -p tcp -m multiport --dports 3306 -j ACCEPT",
-    }
-  }
-  
-  file { '/root/puppet-mysql-readme.txt':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/mysql/readme.txt',
-  }
+
+  anchor { 'mysql::server::start': }
+  anchor { 'mysql::server::end': }
+
+  Anchor['mysql::server::start'] ->
+  Class['mysql::server::install'] ->
+  Class['mysql::server::config'] ->
+  Class['mysql::server::service'] ->
+  Class['mysql::server::root_password'] ->
+  Class['mysql::server::providers'] ->
+  Anchor['mysql::server::end']
+
 }

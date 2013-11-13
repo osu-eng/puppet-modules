@@ -1,49 +1,15 @@
-###  THIS FILE IS MANAGED BY PUPPET!
-###  Manual changes will be overwritten.
-###  See modules/mysql/templates/my.cnf.erb
+<% @options.sort.map do |k,v| -%>
+<% if v.is_a?(Hash) -%>
+[<%= k %>]
+<% @options[k].sort.map do |ki, vi| -%>
+<% if vi and vi != '' -%>
+<%= ki %> = <%= vi %>
+<% else -%>
+<%= ki %>
+<% end -%>
+<% end -%>
 
-[mysqld]
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-user=mysql
+<% end -%>
+<% end -%>
 
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=<%= @symbolic_links %>
-
-# Default to using old password format for compatibility with mysql 3.x
-# clients (those using the mysqlclient10 compatibility package).
-# This is on in pre-puppet production. Hopefully it is not needed anymore tho we may need to convert.
-old_passwords=<%= @old_passwords %>
-
-# I think a high value is necessary for dumps
-max_allowed_packet=<%= @max_allowed_packet %>
-
-# This was added from a time when we used a very bad operating system
-# It's probably not needed anymore.
-lower_case_table_names=<%= @lower_case_table_names %>
-
-####################################
-# Some of these performance settings cause a slower
-# startup process. Be patient and try not to
-# bring it down during an important time.
-####################################
-
-log-slow-queries # places log in data directory
-long_query_time=<%= @long_query_time %> # 10 seconds
-
-innodb_buffer_pool_size=<%= @innodb_buffer_pool_size %> #size in bytes, recommended very large
-key_buffer_size=<%= @key_buffer_size %> #200MB for temp/myisam
-
-query_cache_type=<%= @query_cache_type %> # queries will be cached if no sql_no_cache
-query_cache_size=<%= @query_cache_size %> # 300MB
-
-table_cache=<%= @table_cache %> # num_connections*num joins, number of open tables
-open_files_limit=<%= @open_files_limit %> #max number of open files, supposed to be 3x table_cache
-
-tmp_table_size=<%= @tmp_table_size %> #200MB
-max_heap_table_size=<%= @max_heap_table_size %> # 300MB
-
-
-[mysqld_safe]
-log-error=/var/log/mysqld.log
-pid-file=/var/run/mysqld/mysqld.pid
+!includedir /etc/mysql/conf.d/
