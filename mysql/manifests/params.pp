@@ -25,13 +25,9 @@ class mysql::params {
 
   case $::osfamily {
     'RedHat': {
-      if $::operatingsystem == 'Fedora' and (is_integer($::operatingsystemrelease) and $::operatingsystemrelease >= 19 or $::operatingsystemrelease == "Rawhide") {
-        $client_package_name = 'mariadb'
-        $server_package_name = 'mariadb-server'
-      } else {
-        $client_package_name = 'mysql'
-        $server_package_name = 'mysql-server'
-      }
+      $client_package_name = 'mariadb'
+      $server_package_name = 'mariadb-server'
+
       $basedir             = '/usr'
       $config_file         = '/etc/my.cnf'
       $datadir             = '/var/lib/mysql'
