@@ -46,6 +46,15 @@ class mysql::params {
       $php_package_name    = 'php-mysql'
       $python_package_name = 'MySQL-python'
       $ruby_package_name   = 'ruby-mysql'
+
+
+
+      yumrepo { 'mariadb':
+        baseurl        => "http://yum.mariadb.org/5.5/rhel6-amd64",
+        enabled        => '1',
+        gpgcheck       => '0',
+        descr          => "MariaDB packages "
+      }  
     }
 
     'Suse': {

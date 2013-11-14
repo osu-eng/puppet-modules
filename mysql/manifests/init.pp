@@ -35,12 +35,6 @@ class mysql(
   $attempt_compatibility_mode = false,
 ) {
 
-  yumrepo { 'mariadb':
-    baseurl        => "http://yum.mariadb.org/5.5/rhel6-amd64",
-    enabled        => '1',
-    gpgcheck       => '0',
-    descr          => "MariaDB packages "
-  }
 
   if $attempt_compatibility_mode {
     notify { "An attempt has been made below to automatically apply your custom
