@@ -25,7 +25,7 @@ class mysql::params {
 
   case $::osfamily {
     'RedHat': {
-      $client_package_name = 'mariadb'
+      $client_package_name = 'mariadb-client'
       $server_package_name = 'mariadb-server'
 
       $basedir             = '/usr'
