@@ -34,7 +34,7 @@ class mysql::params {
       $log_error           = '/var/log/mysqld.log'
       $pidfile             = '/var/run/mysqld/mysqld.pid'
       $root_group          = 'root'
-      $server_service_name = 'mysqld'
+      $server_service_name = 'mysql'
       $socket              = '/var/lib/mysql/mysql.sock'
       $ssl_ca              = '/etc/mysql/cacert.pem'
       $ssl_cert            = '/etc/mysql/server-cert.pem'
