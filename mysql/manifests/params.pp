@@ -49,12 +49,6 @@ class mysql::params {
 
 
 
-      yumrepo { 'mariadb':
-        baseurl        => "http://yum.mariadb.org/5.5/rhel6-amd64",
-        enabled        => '1',
-        gpgcheck       => '0',
-        descr          => "MariaDB packages "
-      }  
     }
 
     'Suse': {
