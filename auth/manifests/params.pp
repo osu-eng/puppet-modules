@@ -8,8 +8,9 @@ class auth::params {
   $root_dn = 'cn=admin,dc=local'
   $root_pw = ''
   $realm = 'EXAMPLE.COM'
-  $kdc = 'kerberos.example.com:88'
-  $ticket_lifetime = '24h'
+  $kdc1 = 'kerberos.example.com:88'
+  $kdc2 = 'kerberos.example.com:88'
+  $ticket_lifetime = '600'
   $login_groups = [ 'wheel' ]
   $admin_group = false
   $net_user_group = 'NetUser'
