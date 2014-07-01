@@ -25,12 +25,11 @@
 #
 # === Authors
 #
-# * Richard Pijnenburg <mailto:richard@ispavailability.com>
+# * Richard Pijnenburg <mailto:richard.pijnenburg@elasticsearch.com>
 #
 class logstash::params {
 
   #### Default values for the parameters of the main module class, init.pp
-
 
   # ensure
   $ensure = 'present'
@@ -41,32 +40,81 @@ class logstash::params {
   # service status
   $status = 'enabled'
 
+  # restart on configuration change?
+  $restart_on_change = true
 
-  #### Defaults for other files
+  # Purge configuration directory
+  $purge_configdir = false
 
-  # Config directory
-  $configdir = '/etc/logstash'
+  $purge_package_dir = false
 
-  # Logging dir
-  $logdir = '/var/log/logstash/'
-
-  # File user/group
-  $logstash_user  = 'root'
-  $logstash_group = 'root'
+  # package download timeout
+  $package_dl_timeout = 600 # 300 seconds is default of puppet
 
   #### Internal module values
 
+  # User and Group for the files and user to run the service as.
+  case $::kernel {
+    'Linux': {
+      $logstash_user  = 'root'
+      $logstash_group = 'root'
+    }
+    'Darwin': {
+      $logstash_user  = 'root'
+      $logstash_group = 'wheel'
+    }
+    default: {
+      fail("\"${module_name}\" provides no user/group default value
+           for \"${::kernel}\"")
+    }
+  }
+
+  # Download tool
+
+  case $::kernel {
+    'Linux': {
+      $download_tool = 'wget --no-check-certificate -O'
+    }
+    'Darwin': {
+      $download_tool = 'curl -o'
+    }
+    default: {
+      fail("\"${module_name}\" provides no download tool default value
+           for \"${::kernel}\"")
+    }
+  }
+
+  # Different path definitions
+  case $::kernel {
+    'Linux': {
+      $configdir = '/etc/logstash'
+      $package_dir = '/var/lib/logstash/swdl'
+      $installpath = '/opt/logstash'
+      $plugin = '/opt/logstash/bin/plugin'
+    }
+    'Darwin': {
+      $configdir = '/Library/Application Support/Logstash'
+      $package_dir = '/Library/Logstash/swdl'
+      $installpath = '/Library/Logstash'
+      $plugin = '/Library/Logstash/bin/plugin'
+    }
+    default: {
+      fail("\"${module_name}\" provides no config directory default value
+           for \"${::kernel}\"")
+    }
+  }
+
   # packages
   case $::operatingsystem {
-    'RedHat', 'CentOS', 'Fedora', 'Scientific', 'Amazon': {
+    'RedHat', 'CentOS', 'Fedora', 'Scientific', 'Amazon', 'OracleLinux': {
       # main application
-      $package     = [ 'logstash' ]
-      $installpath = '/usr/share/logstash'
+      $package = [ 'logstash' ]
+      $contrib = [ 'logstash-contrib' ]
     }
     'Debian', 'Ubuntu': {
       # main application
-      $package     = [ 'logstash' ]
-      $installpath = '/var/lib/logstash'
+      $package = [ 'logstash' ]
+      $contrib = [ 'logstash-contrib' ]
     }
     default: {
       fail("\"${module_name}\" provides no package default value
@@ -76,11 +124,12 @@ class logstash::params {
 
   # service parameters
   case $::operatingsystem {
-    'RedHat', 'CentOS', 'Fedora', 'Scientific', 'Amazon': {
+    'RedHat', 'CentOS', 'Fedora', 'Scientific', 'Amazon', 'OracleLinux': {
       $service_name       = 'logstash'
       $service_hasrestart = true
       $service_hasstatus  = true
       $service_pattern    = $service_name
+      $service_providers  = [ 'init' ]
       $defaults_location  = '/etc/sysconfig'
     }
     'Debian', 'Ubuntu': {
@@ -88,7 +137,16 @@ class logstash::params {
       $service_hasrestart = true
       $service_hasstatus  = true
       $service_pattern    = $service_name
+      $service_providers  = [ 'init' ]
       $defaults_location  = '/etc/default'
+    }
+    'Darwin': {
+      $service_name       = 'net.logstash'
+      $service_hasrestart = true
+      $service_hasstatus  = true
+      $service_pattern    = $service_name
+      $service_providers  = [ 'launchd' ]
+      $defaults_location  = false
     }
     default: {
       fail("\"${module_name}\" provides no service parameters
