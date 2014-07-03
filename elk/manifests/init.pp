@@ -17,6 +17,6 @@ class elk {
   }
 
   logstash::configfile { 'configname':
-  	source => 'puppet:///modules/elk/files/logstash.conf'
+  	source => 'puppet:///modules/elk/logstash.conf'
   }
 }
