@@ -2,6 +2,12 @@ class kibana (
 
 ) {
 
+  archive { 'kibana':
+    ensure => present,
+    url    => 'https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz',
+    target => '/var/www',
+  } 
+
   file { '/var/www/kibana/config.js':
     ensure  => present,
     owner   => 'root',

@@ -1,0 +1,28 @@
+{
+  "name": "gini-archive",
+  "version": "0.2.0",
+  "source": "https://github.com/gini/puppet-archive",
+  "author": "Jochen Schalanda",
+  "license": "Apache 2.0",
+  "summary": "Puppet module to download and extract tar and zip archives",
+  "description": "This module downloads archives (tar.{gz,bz2,xz} and zip) using curl and extracts them to a given directory.",
+  "project_page": "https://github.com/gini/puppet-archive",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Gemfile": "a3edfb25825bbbdbe0a56c5a12a08bf6",
+    "LICENSE-2.0.txt": "3b83ef96387f14655fc854ddc3c6bd57",
+    "Modulefile": "4729020d9daa1f711106fc77f2506667",
+    "README.md": "5ce33f48f5fa99d6a567b7b284880526",
+    "Rakefile": "727888ad80f809c4984181b169499d96",
+    "manifests/download.pp": "459bccce5e757de7124fa5155bb55c75",
+    "manifests/extract.pp": "42b492f761088afa2b108bdb2524be42",
+    "manifests/init.pp": "8e11f1fc6607dc2ca86bc511ee829e40",
+    "spec/fixtures/manifests/init.pp": "d41d8cd98f00b204e9800998ecf8427e",
+    "spec/spec_helper.rb": "3011a30b013ba2e44f7bf8615fdf2b8a"
+  }
+}

@@ -1,5 +1,6 @@
 class elk {
   include apache
+  include kibana
 
   class { 'elasticsearch':
     manage_repo  => true,
