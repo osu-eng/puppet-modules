@@ -21,9 +21,14 @@ class elk {
   	source => 'puppet:///modules/elk/logstash.conf'
   }
 
+  file { '/etc/logstash/patterns/apache':
+    source => 'puppet:///modules/elk/apache'
+  }
+
   # Allow our logstash-forwarders to talk to us
   firewall::rule { 'allow-logstash-forwarder':
     weight => '377',
     rule   => '-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 4545 -j ACCEPT',
-  }  
+  }
+
 }
