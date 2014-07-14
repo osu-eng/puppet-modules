@@ -1,5 +1,7 @@
 class log_client {
 
+	include logstashforwarder
+
   file { '/etc/logstashforwarder/ssl/public.cert':
     ensure  => present,
     owner   => 'root',
