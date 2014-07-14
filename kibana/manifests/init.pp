@@ -29,4 +29,8 @@ class kibana (
     mode    => '0644',
     source  => 'puppet:///modules/kibana/httpd.conf',
   }
+
+  file { '/var/www/kibana/app/dashboards/ssh.json':
+    source  => 'puppet:///modules/kibana/dashboards/ssh.json'
+  }
 }
