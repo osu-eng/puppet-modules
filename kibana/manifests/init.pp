@@ -33,4 +33,8 @@ class kibana (
   file { '/var/www/kibana/app/dashboards/ssh.json':
     source  => 'puppet:///modules/kibana/dashboards/ssh.json'
   }
+
+  file { '/var/www/kibana/app/dashboards/apache-access.json':
+    source  => 'puppet:///modules/kibana/dashboards/apache-access.json'
+  }
 }
