@@ -1,4 +1,7 @@
 class log_client::web {
+
+	include logstashforwarder
+
   logstashforwarder::file { 'apache-access':
     paths  => [ '/var/log/httpd/access_log' ],
     fields => { 'type' => 'apache-access' }
