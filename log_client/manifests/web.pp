@@ -1,4 +1,4 @@
-class log_client::web inherits log_client {
+class log_client::web {
 
   logstashforwarder::file { 'apache-access':
     paths  => [ '/var/log/httpd/access_log' ],

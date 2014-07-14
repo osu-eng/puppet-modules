@@ -1,4 +1,4 @@
-class log_client {
+class log_client ($type = 'base') {
 
 	include logstashforwarder
 
@@ -37,6 +37,10 @@ class log_client {
   logstashforwarder::file { 'messages':
     paths  => [ '/var/log/messages', '/var/log/secure' ],
     fields => { 'type' => 'syslog' }
+  }
+
+  if $type == 'web' {
+		include log_client::web
   }
 
 }
