@@ -24,6 +24,10 @@ class log_client {
     source  => 'puppet:///private/etc/httpd/conf/private.key',
   }
 
+  file { "/var/log/logstash-forwarder":
+    ensure => "directory"
+  }
+
   class { 'logstashforwarder':
     manage_repo  => true,
     servers  => [ 'logstash.web.engineering.osu.edu:4545' ],
