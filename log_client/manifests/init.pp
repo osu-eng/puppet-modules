@@ -1,4 +1,4 @@
-class log_client ($type = 'base') {
+class log_client {
 
   file { '/etc/logstashforwarder/ssl/public.cert':
     ensure  => present,
@@ -35,10 +35,6 @@ class log_client ($type = 'base') {
   logstashforwarder::file { 'messages':
     paths  => [ '/var/log/messages', '/var/log/secure' ],
     fields => { 'type' => 'syslog' }
-  }
-
-  if $type == 'web' {
-		include log_client::web
   }
 
 }
