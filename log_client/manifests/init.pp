@@ -29,7 +29,8 @@ class log_client {
     servers  => [ 'logstash.web.engineering.osu.edu:4545' ],
     ssl_key  => '/etc/logstashforwarder/ssl/private.key',
     ssl_ca   => '/etc/logstashforwarder/ssl/ca-chain.cert',
-    ssl_cert => '/etc/logstashforwarder/ssl/public.cert'
+    ssl_cert => '/etc/logstashforwarder/ssl/public.cert',
+    init_template => 'logstashforwarder/etc/init.d/logstashforwarder.RedHat.erb'
   }
 
   logstashforwarder::file { 'messages':
