@@ -1,7 +1,7 @@
 # Managed by Puppet 
 # modules/rvm/templates/passenger-apache-centos.conf.erb
 
-LoadModule passenger_module <%= gempath %>/passenger-<%= version %></buildout/apache2/mod_passenger.so
+LoadModule passenger_module <%= gempath %>/passenger-<%= version %>/buildout/apache2/mod_passenger.so
 
 <IfModule mod_passenger.c>
   PassengerRoot <%= gempath %>/passenger-<%= version %>
