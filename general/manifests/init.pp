@@ -24,10 +24,8 @@ class general {
     source => 'puppet:///modules/general/99-vmware-scsi-udev.rules',
   }
 
-  file {'hung_task_timeout_secs':
-    path    => '/proc/sys/kernel/hung_task_timeout_secs',
-    ensure  => present,
-    content => "420",
+  sysctl { 'kernel.hung_task_timeout_secs':
+    value => '420',
   }
 
 }
