@@ -17,4 +17,17 @@ class general {
   package { $package_blacklist:
     ensure => absent
   }
+
+  file {'99-vmware-scsi-udev.rules':
+    path    => '/etc/udev/rules.d/99-vmware-scsi-udev.rules',
+    ensure  => present,
+    source => 'puppet:///modules/general/99-vmware-scsi-udev.rules',
+  }
+
+  file {'hung_task_timeout_secs':
+    path    => '/proc/sys/kernel/hung_task_timeout_secs',
+    ensure  => present,
+    content => "420",
+  }
+
 }
